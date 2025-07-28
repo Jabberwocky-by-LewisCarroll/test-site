@@ -1,0 +1,42 @@
+<!--Странцица с формой для отправки данных на сервер.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание нового объекта</title>
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <script src="../src/scripts/index.js"></script>
+</head>
+<body>
+
+    <div class="wrapper-content-centered flex-column">
+        <!--Форма для отправки данных на сервер-->
+        <form class="form">
+            <input type="text" name="name" placeholder="Enter your name">
+            <input type="text" name="surname" placeholder="Enter your surname">
+            <input type="email" name="email" placeholder="Enter your email">
+            <button type="submit">Отправить</button>
+        </form>
+
+        <!--Отступ 2rem-->
+        <div style="height: 2rem;"></div>
+
+        <!--Кнопка для перехода к списку объектов (div как кнопка, ссылка внутри)-->
+        <!--
+        <div class="btn-link">
+            <a class="btn-text" href="getObjects.html">Перейти к списку объектов</a>
+        </div>
+        -->
+
+        <!--Отступ 1rem-->
+        <div style="height: 1rem;"></div>
+
+        <!--Кнопка для перехода к списку объектов V2 (Ссылка полностью стилизована как кнопка)-->
+        <div class="mrg-horizon-center">
+        <a class="link-btn" href="getObjectsV2.html">Перейти к списку объектов V2</a>
+        </div>
+    </div>
+</body>
+</html>

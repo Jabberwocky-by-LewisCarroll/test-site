@@ -1,0 +1,36 @@
+<!--
+    Эта страница отличается от getObjects.html тем, что использует другой принцип генерации объектов.
+    Здесь используется шаблонный элемент для создания карточек объектов.
+    JavaScript клонирует шаблон в зависимости от того сколько объектов пришло из базы данных и заполняет их.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список объектов V2</title>
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <script src="../src/scripts/getObjectsV2.js"></script>
+</head>
+<body class="body">
+    <h1>Список объектов</h1>
+    <div class="mrg-horizon-left">
+        <a class="link-btn" href="index.html">Создать новый объект</a>
+    </div>
+    <div style="height: 5rem"></div>
+    <div class="obj-wrapper">
+        <template id="template">
+            <div class="obj-card">
+                <p>Имя: <span class="name"></span></p>
+                <p>Фамилия: <span class="surname"></span></p>
+                <p>Email: <span class="email"></span></p>
+                <p>ID: <span class="id"></span></p>
+                <div class="mrg-horizon-center">
+                    <a class="link-btn" href="#">Подробнее</a>
+                </div>
+            </div>
+        </template>
+    </div>
+</body>
+</html>
