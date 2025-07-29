@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json'
             },
 
-            // Для теста временно логин и пароль заменяют email и name из объектов
+            // Для теста временно логин и пароль заменяю email и name из объектов
             body: JSON.stringify({
                 "provider": "rest",
                 "username": data.email,
