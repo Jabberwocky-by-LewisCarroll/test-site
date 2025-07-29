@@ -1,0 +1,32 @@
+<!--Страница с формой авторизации.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <script src="../src/scripts/reg.js"></script>
+</head>
+<body>
+    <div class="wrapper-content-centered flex-column">
+        <h1>Регистрация</h1>
+
+        <!--Форма для отправки данных на сервер-->
+        <form class="form">
+            <input type="text" name="name" placeholder="Имя">
+            <input type="text" name="surname" placeholder="Фамилия">
+            <input type="email" name="email" placeholder="Email">
+            <button type="submit" class="link-btn">Зарегистрироваться</button>
+        </form>
+
+        <div style="height: 2rem;"></div>
+
+        <!--Возврат на страницу авторизации-->
+        <div class="mrg-horizon-center">
+            <a class="link-btn" href="../index.html">Авторизация</a>
+        </div>
+    </div>
+</body>
+</html>
