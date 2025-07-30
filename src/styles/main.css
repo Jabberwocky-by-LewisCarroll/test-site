@@ -4,6 +4,10 @@ body {
     background-color: #ffeccc
 }
 
+p {
+    margin: 0;
+}
+
 /*Заголовки*/
 h1 {
     margin-bottom: 5rem;
@@ -53,6 +57,7 @@ h1 {
     box-shadow: 0px 0px 10px 0px #000000 inset;
 }
 
+
 /*Формы и их состовляющие*/
 .form {
     display: flex;
@@ -81,6 +86,12 @@ h1 {
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+.input__password-type {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 1rem;
 }
 
 /*Карточки объектов*/
@@ -137,6 +148,11 @@ h1 {
 .flex-column {
     display: flex;
     flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
 }
 
 .mrg-horizon-center {

@@ -48,4 +48,15 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error(error);
         });
     });
+
+    const passwordInput = document.querySelector('#passwordInput');
+    const togglePasswordType = document.querySelector('#togglePasswordType');
+
+    if (passwordInput && togglePasswordType) {
+        togglePasswordType.addEventListener('change', function () {
+            if (passwordInput && togglePasswordType) {
+                passwordInput.type = togglePasswordType.checked ? 'text' : 'password';
+            }
+        });
+    }
 });
