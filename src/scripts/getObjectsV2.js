@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    if (!localStorage.getItem('sessionID')) {
+        window.location.href = '../index.html';
+        return;
+    }
+
     const container = document.querySelector('.obj-wrapper');
     // Получаем шаблон из контейнера
     const template = container.querySelector('template');
@@ -26,4 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
             container.innerHTML += '<p>Ошибка загрузки данных</p>';
             console.error(error);
         });
+
+        const logoutBtn = document.querySelector('#logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.localStorage.removeItem('sessionID');
+                alert('sessionID deleted!');
+                window.location.href = logoutBtn.href;
+            })
+        }
 });

@@ -6,23 +6,42 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
+        // Заглушка для теста
+        // Promise.resolve({
+        //     result: {
+        //         token: "acaf731e-03ca-45f8-ab4e-4310a007c844",
+        //         username: "5652513695",
+        //         role: "",
+        //         nid: 23008
+        //     },
+        //     status: "ok"
+        // })
+
         fetch('https://api.directual.com/good/api/v5/auth?appID=640a9d7b-5015-4ea0-8206-a4eddcef054b', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-
-            // Для теста временно логин и пароль заменяю email и name из объектов
             body: JSON.stringify({
                 "provider": "rest",
-                "username": data.email,
-                "password": data.name,
+                "username": data.login,
+                "password": data.password,
             })
         })
         .then(response => response.json())
         .then(result => {
+
             // Обработка ответа от сервера
             alert('Ответ сервера: ' + JSON.stringify(result));
+
+            if (result.status.toLowerCase() === 'ok') {
+                window.localStorage.setItem('sessionID', result.result.token)
+                window.location.href = 'public/getObjectsV2.html';
+                alert('sessionID was set!');
+            } else {
+                alert('Ошибка авторизации: ' + result.message);
+                return;
+            }
         })
         .catch(error => {
             alert('Ошибка! Ответ сервера: ' + JSON.stringify(error));
