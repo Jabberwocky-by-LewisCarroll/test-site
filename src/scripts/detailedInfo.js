@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    if (!localStorage.getItem('sessionID')) {
+        window.location.href = '../index.html';
+        return;
+    }
+    
     const container = document.getElementById('detailedInfo');
     // Получаем id из параметров URL
     const params = new URLSearchParams(window.location.search);
