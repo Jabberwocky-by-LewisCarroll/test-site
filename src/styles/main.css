@@ -16,9 +16,10 @@ ul {
 
 table {
     width: 100%;
-    border: 1px solid rgb(128, 128, 128);
+    border: 1px solid rgb(73, 73, 73);
     border-spacing: 0;
-    color: rgb(255, 255, 255);
+    background-color: #282828;
+    color: rgb(210, 210, 210);
 }
 
 th {

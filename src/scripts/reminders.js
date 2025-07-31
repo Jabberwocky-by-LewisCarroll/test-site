@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const clone = tempComTab.content.cloneNode(true);
                     clone.querySelector('#remName').textContent = obj.textRemind || '';
                     clone.querySelector('#remStatus').textContent = obj.status || '';
-                    clone.querySelector('#remCreatedDate').textContent = obj.dateRemindFomated || '';
-                    clone.querySelector('#remCreatedTime').textContent = obj.timeFormatedForMenu || '';
+                    clone.querySelector('#remRemindDate').textContent = obj.dateRemindFomated || '';
+                    clone.querySelector('#remRemindTime').textContent = obj.timeFormatedForMenu || '';
                     clone.querySelector('#remID').textContent = obj.id || '';
                     containerComTab.appendChild(clone);
                 });
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const clone = tempActTab.content.cloneNode(true);
                     clone.querySelector('#remName').textContent = obj.textRemind || '';
                     clone.querySelector('#remStatus').textContent = obj.status || '';
-                    clone.querySelector('#remCreatedDate').textContent = obj.dateRemindFomated || '';
-                    clone.querySelector('#remCreatedTime').textContent = obj.timeFormatedForMenu || '';
+                    clone.querySelector('#remRemindDate').textContent = obj.dateRemindFomated || '';
+                    clone.querySelector('#remRemindTime').textContent = obj.timeFormatedForMenu || '';
                     clone.querySelector('#remID').textContent = obj.id || '';
                     containerActTab.appendChild(clone);
                 });
