@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Регистрация прошла успешно! Ответ сервера: ' + JSON.stringify(result));
 
             // Если регистрация успешна, перенаправляем на страницу авторизации
-            if (result.result.success === true) {
+            if (result.result[0].success === true) {
                 window.location.href = '../index.html';
             }
             else {
