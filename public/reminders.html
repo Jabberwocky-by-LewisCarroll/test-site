@@ -5,24 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../src/styles/main.css">
+    <script src="../src/scripts/reminders.js"></script>
     <script src="../src/scripts/logoutBtn.js"></script>
 </head>
 <body>
-
     <nav class="navbar">
-        <div class="flex-row">
-            <p>Logo</p>
-            <p>Brand Name</p>
+        <div class="navbar__content-wrapper">
+            <div class="flex-row">
+                <p>Logo</p>
+                <div style="width: 0.5rem;"></div>
+                <p>Brand Name</p>
+            </div>
+            <div class="navbar__links-container">
+                <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
+                <a class="link-btn" href="reminders.html">Напоминания</a>
+            </div>
+            <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
         </div>
-        <div class="navbar__links-container">
-            <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
-            <a class="link-btn" href="reminders.html">Напоминания</a>
-        </div>
-        <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
     </nav>
     
-    <h1>Напоминания</h1>
-
-    
+    <div class="main-wrapper">
+        <h1>Напоминания</h1>
+        <div class="tables__btns">
+            <div class="flex-row">
+                <button id="tables__btn-com">Завершённые</button>
+                <div style="width: 1rem;"></div>
+                <button id="tables__btn-act">Актуальные</button>
+            </div>
+            <button class="link-btn">Добавить напоминание</button>
+        </div>
+        <div class="position__relative">
+            <table class="table__com position__absolute" id="remComTab">
+                <thead>
+                    <tr class="tr__alt">
+                        <th>Название</th>
+                        <th>Статус</th>
+                        <th>Дата создания</th>
+                        <th>Время создания</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody id="remComContainer">
+                    <template id="remComTabRows">
+                        <tr>
+                            <td id="remName"></td>
+                            <td id="remStatus"></td>
+                            <td id="remCreatedDate"></td>
+                            <td id="remCreatedTime"></td>
+                            <td id="remID"></td>
+                        </tr>
+                    </template>
+                </tbody>
+                <tfoot>
+                    <tr class="tr__alt">
+                        <td colspan="4">Количество напоминаний: </td>
+                        <td><span class="remCount">0</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <table class="table__act position__absolute" id="remActTab">
+                <thead>
+                    <tr class="tr__alt">
+                        <th>Название</th>
+                        <th>Статус</th>
+                        <th>Дата создания</th>
+                        <th>Время создания</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody id="remActContainer">
+                    <template id="remActTabRows">
+                        <tr>
+                            <td id="remName"></td>
+                            <td id="remStatus"></td>
+                            <td id="remCreatedDate"></td>
+                            <td id="remCreatedTime"></td>
+                            <td id="remID"></td>
+                        </tr>
+                    </template>
+                </tbody>
+                <tfoot>
+                    <tr class="tr__alt">
+                        <td colspan="4">Количество напоминаний: </td>
+                        <td><span class="remCount">0</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <template id="remActTab">
+            </template>
+        </div>
+    </div>
 </body>
 </html>

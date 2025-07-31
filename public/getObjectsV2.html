@@ -14,35 +14,38 @@
     <script src="../src/scripts/getObjectsV2.js"></script>
     <script src="../src/scripts/logoutBtn.js"></script>
 </head>
-<body class="body">
-
+<body>
     <nav class="navbar">
-        <div class="flex-row">
-            <p>Logo</p>
-            <p>Brand Name</p>
+        <div class="navbar__content-wrapper">
+            <div class="flex-row">
+                <p>Logo</p>
+                <div style="width: 0.5rem;"></div>
+                <p>Brand Name</p>
+            </div>
+            <div class="navbar__links-container">
+                <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
+                <a class="link-btn" href="reminders.html">Напоминания</a>
+            </div>
+            <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
         </div>
-        <div class="navbar__links-container">
-            <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
-            <a class="link-btn" href="reminders.html">Напоминания</a>
-        </div>
-        <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
     </nav>
 
-    <h1>Список объектов</h1>
-    
-    <div class="obj-wrapper">
-        <template id="template">
-            <div class="obj-card">
-                <p>Имя: <span class="name"></span></p>
-                <p>Фамилия: <span class="surname"></span></p>
-                <p>Email: <span class="email"></span></p>
-                <p>ID: <span class="id"></span></p>
-                <div class="mrg-horizon-center">
-                    <a class="link-btn" href="#">Подробнее</a>
+    <div class="main-wrapper">
+        <h1>Список объектов</h1>
+        
+        <div class="obj-wrapper">
+            <template id="template">
+                <div class="obj-card">
+                    <p>Имя: <span class="name"></span></p>
+                    <p>Фамилия: <span class="surname"></span></p>
+                    <p>Email: <span class="email"></span></p>
+                    <p>ID: <span class="id"></span></p>
+                    <div class="mrg-horizon-center">
+                        <a class="link-btn" href="#">Подробнее</a>
+                    </div>
                 </div>
-            </div>
-        </template>
-
+            </template>
+        </div>
     </div>
 </body>
 </html>

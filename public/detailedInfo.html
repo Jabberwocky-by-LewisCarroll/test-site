@@ -7,16 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Детальная информация об объекте</title>
     <link rel="stylesheet" href="../src/styles/main.css">
+    <script src="../src/scripts/reminders.js"></script>
     <script src="../src/scripts/detailedInfo.js"></script>
 </head>
 <body>
-    <div class="wrapper-content-centered flex-column position__relative">
-        <div class="obj-card__detailed">
-            <h1>Детальная информация</h1>
-            <div id="detailedInfo"></div>
-            <div style="height: 5rem"></div>
-            <div class="mrg-horizon-center position__absolute_top-left">
-                <a class="link-btn" href="getObjectsV2.html">Назад</a>
+    <nav class="navbar">
+        <div class="navbar__content-wrapper">
+            <div class="flex-row">
+                <p>Logo</p>
+                <div style="width: 0.5rem;"></div>
+                <p>Brand Name</p>
+            </div>
+            <div class="navbar__links-container">
+                <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
+                <a class="link-btn" href="reminders.html">Напоминания</a>
+            </div>
+            <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
+        </div>
+    </nav>
+    <div class="main-wrapper">
+        <div class="wrapper-content-centered flex-column position__relative">
+            <div class="obj-card__detailed">
+                <h1>Детальная информация</h1>
+                <div id="detailedInfo"></div>
+                <div style="height: 5rem"></div>
+                <div class="mrg-horizon-center position__absolute_top-left">
+                    <a class="link-btn" href="getObjectsV2.html">Назад</a>
+                </div>
             </div>
         </div>
     </div>

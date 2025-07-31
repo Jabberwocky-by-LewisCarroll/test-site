@@ -1,12 +1,12 @@
 body {
     margin: 0;
-    padding-left: 5rem;
-    padding-right: 5rem;
-    background-color: #ccfffb
+    background-image: radial-gradient(ellipse, #000000 60%, #4a4a4a);
+    height: 100vh;
 }
 
 p {
     margin: 0;
+    color: white;
 }
 
 ul {
@@ -14,16 +14,46 @@ ul {
     padding: 0;
 }
 
+table {
+    width: 100%;
+    border: 1px solid rgb(128, 128, 128);
+    border-spacing: 0;
+    color: rgb(255, 255, 255);
+}
+
+th {
+    border: 1px solid rgb(128, 128, 128);
+}
+
+tr {
+    border: 1px solid rgb(128, 128, 128);
+}
+
+td {
+    border: 1px solid rgb(128, 128, 128);
+}
+
 /*Навигация*/
 .navbar {
     display: flex;
-    flex-direction: row;
     position: sticky;
+    z-index: 999;
     top: 0;
+    width: 100%;
     height: 4rem;
     align-items: center;
-    justify-content: space-between;
+    background-color: transparent;
     backdrop-filter: blur(15px);
+}
+
+.navbar__content-wrapper {
+    display: flex;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navbar__links-container {
@@ -38,12 +68,13 @@ ul {
 h1 {
     margin-bottom: 5rem;
     text-align: center;
+    color: white;
 }
 
 /*Кнопки*/
 .link-btn {
     display: flex;
-    background-color: #1976d2;
+    background-color: #104b85;
     color: white;
     text-decoration-line: none;
     padding: 0.5rem;
@@ -84,7 +115,6 @@ h1 {
     box-shadow: 0px 0px 10px 0px #000000 inset;
 }
 
-
 /*Формы и их состовляющие*/
 .form {
     display: flex;
@@ -96,10 +126,16 @@ h1 {
     padding: 1rem;
     box-shadow: 0px 0px 10px 0px #000000;
     gap: 1rem;
-    background-color: #fbedff
+    background-color: #2e003b;
+    box-shadow: 0px 0px 20px 0px #ffffff;
 }
 
 /*Обёртки*/
+.main-wrapper {
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
 .obj-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -127,7 +163,7 @@ h1 {
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
-    background-color: greenyellow;
+    background-color: #4d6328;
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0px 0px 10px 0px #000000;
@@ -140,7 +176,7 @@ h1 {
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
-    background-color: rgb(191, 255, 95);
+    background-color: rgb(84, 103, 55);
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0px 0px 10px 0px #000000;
@@ -155,7 +191,7 @@ h1 {
     height: 100%;
     align-items: center;
     justify-content: center;
-    background-color: rgb(191, 255, 95);
+    background-color: #4a533a;
     border-radius: 1rem;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -170,6 +206,10 @@ h1 {
 
 .position__relative {
     position: relative;
+}
+
+.position__absolute {
+    position: absolute;
 }
 
 .flex-column {
@@ -195,6 +235,25 @@ h1 {
 
 .inline-block {
     display: inline-block;
+}
+
+/*Таблицы*/
+.tr__alt {
+    background-color: #4d6328;
+}
+
+.tables__btns {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.table__com {
+    display: none;
+}
+
+.table__act {
+    display: table;
 }
 
 /* Анимации */
