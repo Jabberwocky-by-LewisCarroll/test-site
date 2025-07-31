@@ -12,13 +12,24 @@
     <title>Список объектов V2</title>
     <link rel="stylesheet" href="../src/styles/main.css">
     <script src="../src/scripts/getObjectsV2.js"></script>
+    <script src="../src/scripts/logoutBtn.js"></script>
 </head>
 <body class="body">
-    <h1>Список объектов</h1>
-    <div class="mrg-horizon-left">
+
+    <nav class="navbar">
+        <div class="flex-row">
+            <p>Logo</p>
+            <p>Brand Name</p>
+        </div>
+        <div class="navbar__links-container">
+            <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
+            <a class="link-btn" href="reminders.html">Напоминания</a>
+        </div>
         <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
-    </div>
-    <div style="height: 5rem"></div>
+    </nav>
+
+    <h1>Список объектов</h1>
+    
     <div class="obj-wrapper">
         <template id="template">
             <div class="obj-card">
@@ -31,6 +42,7 @@
                 </div>
             </div>
         </template>
+
     </div>
 </body>
 </html>

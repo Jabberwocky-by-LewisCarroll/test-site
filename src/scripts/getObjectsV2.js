@@ -32,14 +32,4 @@ document.addEventListener('DOMContentLoaded', function () {
             container.innerHTML += '<p>Ошибка загрузки данных</p>';
             console.error(error);
         });
-
-        const logoutBtn = document.querySelector('#logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.localStorage.removeItem('sessionID');
-                alert('sessionID deleted!');
-                window.location.href = logoutBtn.href;
-            })
-        }
 });
