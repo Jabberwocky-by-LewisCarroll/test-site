@@ -72,6 +72,13 @@ h1 {
     color: white;
 }
 
+h3 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
 /*Кнопки*/
 .link-btn {
     display: flex;
@@ -234,8 +241,8 @@ h1 {
     margin-right: auto;
 }
 
-.inline-block {
-    display: inline-block;
+.justify-content__space-between {
+    justify-content: space-between;
 }
 
 /*Таблицы*/

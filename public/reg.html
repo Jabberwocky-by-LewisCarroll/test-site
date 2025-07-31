@@ -15,9 +15,13 @@
 
         <!--Форма для отправки данных на сервер-->
         <form class="form">
-            <input type="text" name="name" placeholder="Имя">
-            <input type="text" name="surname" placeholder="Фамилия">
-            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="login" placeholder="Логин" required>
+            <input type="password" name="password" id="passwordInput" placeholder="Пароль" required>
+            <input type="password" name="passwordRepeat" id="passwordRepeatInput" placeholder="Повторите пароль" required>
+            <div class='flex-row'>
+                <p>Показать пароль: </p>
+                <input type="checkbox" id="togglePasswordType" class="input__password-type">
+            </div>
             <button type="submit" class="link-btn">Зарегистрироваться</button>
         </form>
 

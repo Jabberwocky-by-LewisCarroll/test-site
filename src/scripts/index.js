@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Обработчик для чекбокса
     const passwordInput = document.querySelector('#passwordInput');
     const togglePasswordType = document.querySelector('#togglePasswordType');
 
