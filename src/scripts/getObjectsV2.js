@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     clone.querySelector('.surname').textContent = obj.surname || '';
                     clone.querySelector('.email').textContent = obj.email || '';
                     clone.querySelector('.id').textContent = obj.id || '';
-                    clone.querySelector('.link-btn').href = `detailedInfo.html?id=${obj.id}`;
+                    clone.querySelector('#btnView').href = `detailedInfo.html?id=${obj.id}`;
+                    // clone.querySelector('#btnChange').href = '';
+                    // clone.querySelector('#btnDelete').href = '';
                     container.appendChild(clone);
                 });
             } else {
