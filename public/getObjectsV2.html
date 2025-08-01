@@ -15,6 +15,23 @@
     <script src="../src/scripts/logoutBtn.js"></script>
 </head>
 <body>
+    <div class="popup-window edit">
+        <form class="form edit">
+            <input type="text" name="name" value="">
+            <input type="text" name="surname" value="">
+            <input type="email" name="email" value="">
+            <input type="text" name="id" value="">
+            <button class="link-btn edit">Сохранить</button>
+        </form>
+    </div>
+    <div class="popup-window add">
+        <form class="form add">
+            <input type="text" name="name" value="">
+            <input type="text" name="surname" value="">
+            <input type="email" name="email" value="">
+            <button class="link-btn add">Добавить</button>
+        </form>
+    </div>
     <nav class="navbar">
         <div class="navbar__content-wrapper">
             <div class="flex-row">
@@ -56,7 +73,6 @@
                 </div>
             </template>
         </div>
-    </div>
     <!-- Кнопка для проверки наличия sessionID -->
      <div>
          <button id="sessionIDCheck">Проверить sessionID</button>
