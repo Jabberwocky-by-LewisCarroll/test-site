@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
         
         btnComTab.style.boxShadow = 'none';
         btnActTab.style.boxShadow = '0px 0px 10px 0px #000000 inset';
-        tabCom.style.display = 'table';
-        tabAct.style.display = 'none';
+        tabCom.style.display = 'none';
+        tabAct.style.display = 'table';
 
         btnComTab.addEventListener('click', function (e) {
             e.preventDefault();
@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
             btnActTab.style.boxShadow = 'none';
         });
 
-        btnActTab.style.boxShadow = '0px 0px 10px 0px #000000 inset';
         btnActTab.addEventListener('click', function (e) {
             e.preventDefault();
             tabCom.style.display = 'none';
