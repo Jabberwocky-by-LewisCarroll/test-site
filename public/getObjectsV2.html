@@ -15,17 +15,27 @@
     <script src="../src/scripts/logoutBtn.js"></script>
 </head>
 <body>
-    <div class="popup-window edit">
+    <div class="popup-window edit hide">
         <form class="form edit">
+            <div class="btn__exit-form">
+                <div class="btn__item a"></div>
+                <div class="btn__item b"></div>
+            </div>
+            <h3>Редактирование</h3>
             <input type="text" name="name" value="">
             <input type="text" name="surname" value="">
             <input type="email" name="email" value="">
             <input type="text" name="id" value="">
-            <button class="link-btn edit">Сохранить</button>
+            <button class="link-btn edit hide">Сохранить</button>
         </form>
     </div>
-    <div class="popup-window add">
+    <div class="popup-window add hide">
         <form class="form add">
+            <div class="btn__exit-form">
+                <div class="btn__item a"></div>
+                <div class="btn__item b"></div>
+            </div>
+            <h3>Создание</h3>
             <input type="text" name="name" value="">
             <input type="text" name="surname" value="">
             <input type="email" name="email" value="">
@@ -63,7 +73,7 @@
                         </div>
                         <div style="width: 1rem;"></div>
                         <div class="mrg-horizon-center">
-                            <button class="link-btn change" type="button">Изменить</button>
+                            <button class="link-btn edit" type="button">Изменить</button>
                         </div>
                         <div style="width: 1rem;"></div>
                         <div class="mrg-horizon-center">

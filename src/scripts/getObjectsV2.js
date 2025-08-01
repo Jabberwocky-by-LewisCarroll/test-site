@@ -15,71 +15,90 @@ document.addEventListener('DOMContentLoaded', function () {
     const template = container.querySelector('template');
 
     fetch(`https://api.directual.com/good/api/v5/data/testApi/newTestUser?appID=${appID}&sessionID=${sessionID}`)
-        .then(response => response.json())
-        .then(data => {
-            const objects = Array.isArray(data.payload) ? data.payload : [];
-            if (objects.length > 0) {
-                objects.forEach(obj => {
-                    // Клонируем содержимое шаблона
-                    const clone = template.content.cloneNode(true);
-                    const card = clone.querySelector('.obj-card');
-                    card.querySelector('.name').textContent = obj.name || '';
-                    card.querySelector('.surname').textContent = obj.surname || '';
-                    card.querySelector('.email').textContent = obj.email || '';
-                    card.querySelector('.id').textContent = obj.id || '';
-                    card.querySelector('.link-btn.view').href = `detailedInfo.html?id=${obj.id}`;
-                    card.querySelector('.link-btn.change');
-                    card.querySelector('.link-btn.delete');
-                    container.appendChild(card);
+    .then(response => response.json())
+    .then(data => {
+        const objects = Array.isArray(data.payload) ? data.payload : [];
+        if (objects.length > 0) {
+            objects.forEach(obj => {
+                
+                // Клонируем содержимое шаблона
+                const clone = template.content.cloneNode(true);
+                const card = clone.querySelector('.obj-card');
+                card.querySelector('.name').textContent = obj.name || '';
+                card.querySelector('.surname').textContent = obj.surname || '';
+                card.querySelector('.email').textContent = obj.email || '';
+                card.querySelector('.id').textContent = obj.id || '';
+                card.querySelector('.link-btn.view').href = `detailedInfo.html?id=${obj.id}`;
+                card.querySelector('.link-btn.edit');
+                card.querySelector('.link-btn.delete');
+                container.appendChild(card);
 
-                    // Обработка кнопки "Удалить"
-                    const btnDelete = card.querySelector('.link-btn.delete');
+                // Обработчик кнопки "Изменить"
+                const btnCardEdit = document.querySelectorAll('.link-btn.edit')
+                btnCardEdit.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const popup = document.querySelector('.popup-window.edit');
+                        popup.classList.replace('hide', 'show');
+                });
 
-                    // Проверка на наличие кнопки "Удалить"
-                    if (btnDelete) {
-                        btnDelete.addEventListener('click', function(e) {
-                            e.preventDefault();
+                // Обработчик кнопки "Закрыть форму"
+                const btnFormExit = document.querySelector('.btn__exit-form')
+                btnFormExit.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const popup = document.querySelector('.popup-window');
+                    popup.classList.replace('show', 'hide');
+                });
+                         
+                // Обработка кнопки "Удалить"
+                const btnDelete = card.querySelector('.link-btn.delete');
 
-                            const name = card.querySelector('.name').textContent;
-                            const surname = card.querySelector('.surname').textContent;
-                            const email = card.querySelector('.email').textContent;
-                            const id = card.querySelector('.id').textContent;
+                // Проверка на наличие кнопки "Удалить"
+                if (btnDelete) {
+                    btnDelete.addEventListener('click', function(e) {
+                        e.preventDefault();
 
-                            fetch(`https://api.directual.com/good/api/v5/data/inputtestapi/editTestObjects?appID=${appID}&sessionID=${sessionID}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    "name": name,
-                                    "surname": surname,
-                                    "email": email,
-                                    "testApiStructID": id,
-                                    "action": "DELETE"
-                                })
-                            })
-                            .then(response => response.json())
-                            .then(result => {
-                                if (result.result[0].success === true) {
-                                    alert(`Объект '${id}' успешно удалён`)
-                                    card.remove();
-                                }
-                                else {
-                                    alert(`Ошибка удаления на сервере:\n\n${result.result[0].Result}`)
-                                }
-                                })
-                            .catch(error => {
-                                console.log(error);
+                        const name = card.querySelector('.name').textContent;
+                        const surname = card.querySelector('.surname').textContent;
+                        const email = card.querySelector('.email').textContent;
+                        const id = card.querySelector('.id').textContent;
+
+                        fetch(`https://api.directual.com/good/api/v5/data/inputtestapi/editTestObjects?appID=${appID}&sessionID=${sessionID}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                "name": name,
+                                "surname": surname,
+                                "email": email,
+                                "testApiStructID": id,
+                                "action": "DELETE"
                             })
                         })
-                    }
-                });
-            } else {
-                container.innerHTML += '<p>Нет данных</p>';
-            }
-        })
-        .catch(error => {
-            container.innerHTML += '<p>Ошибка загрузки данных</p>';
-            console.error(error);
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.result[0].success === true) {
+                                alert(`Объект '${id}' успешно удалён`)
+                                card.remove();
+                            }
+                            else {
+                                alert(`Ошибка удаления на сервере:\n\n${result.result[0].Result}`)
+                            }
+                            })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                    })
+                };
+            });
         });
+        } else {
+            container.innerHTML += '<p>Нет данных</p>';
+        }
+    })
+    .catch(error => {
+        container.innerHTML += '<p>Ошибка загрузки данных</p>';
+        console.error(error);
+    });
 });
