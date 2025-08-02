@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tabCom = document.querySelector('#remComTab');
         tabAct = document.querySelector('#remActTab');
 
-        
+        // Начальное состояние при загрузке
         btnComTab.style.boxShadow = 'none';
         btnActTab.style.boxShadow = '0px 0px 10px 0px #000000 inset';
         tabCom.style.display = 'none';

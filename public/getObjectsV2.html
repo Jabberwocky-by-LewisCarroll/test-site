@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../src/styles/main.css">
     <script src="../src/scripts/getObjectsV2.js"></script>
     <script src="../src/scripts/logoutBtn.js"></script>
+    <script src="../src/scripts/currentPageBtnDisabled.js"></script>
 </head>
 <body>
     <div class="popup-window edit hide">
@@ -50,8 +51,8 @@
                 <p>Brand Name</p>
             </div>
             <div class="navbar__links-container">
-                <a class="link-btn" href="getObjectsV2.html">Список объектов</a>
-                <a class="link-btn" href="reminders.html">Напоминания</a>
+                <a class="link-btn" href="getObjectsV2.html" aria-disabled="false">Список объектов</a>
+                <a class="link-btn" href="reminders.html" aria-disabled="false">Напоминания</a>
             </div>
             <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
         </div>
