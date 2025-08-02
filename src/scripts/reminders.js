@@ -30,6 +30,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     clone.querySelector('#remID').textContent = obj.id || '';
                     containerComTab.appendChild(clone);
                 });
+
+                // Обновляем количество напоминаний
+                const remComCount = document.querySelector('span.remComCount');
+                if (data.pageInfo.tableSize > 0) {
+                    remComCount.textContent = data.pageInfo.tableSize;
+                } else {
+                    remComCount.textContent = '0';
+                }
+
             } else {
                 containerComTab.innerHTML += '<tr><td>Нет данных</td><td></td><td></td><td></td><td></td></tr>';
             }
@@ -55,6 +64,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     clone.querySelector('#remID').textContent = obj.id || '';
                     containerActTab.appendChild(clone);
                 });
+
+                // Обновляем количество напоминаний
+                const remActCount = document.querySelector('span.remActCount');
+                if (data.pageInfo.tableSize > 0) {
+                    remActCount.textContent = data.pageInfo.tableSize;
+                } else {
+                    remActCount.textContent = '0';
+                }
+                
             } else {
                 containerActTab.innerHTML += '<tr><td>Нет данных</td><td></td><td></td><td></td><td></td></tr>';
             }
