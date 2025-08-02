@@ -34,12 +34,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.appendChild(card);
 
                 // Обработчик кнопки "Изменить"
-                const btnCardEdit = document.querySelectorAll('.link-btn.edit')
+                const btnCardEdit = card.querySelector('.link-btn.edit')
                 btnCardEdit.forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.preventDefault();
                         const popup = document.querySelector('.popup-window.edit');
                         popup.classList.replace('hide', 'show');
+
+                        // Заполняем поля формы данными объекта
+                        const form = popup.querySelector('form');
+                        form.elements['name'].value = obj.name || '';
+                        form.elements['surname'].value = obj.surname || '';
+                        form.elements['email'].value = obj.email || '';
+                        form.elements['id'].value = obj.id || '';
                 });
 
                 // Обработчик кнопки "Закрыть форму"
