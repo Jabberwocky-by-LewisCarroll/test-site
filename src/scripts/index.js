@@ -50,14 +50,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Обработчик для чекбокса
-    const passwordInput = document.querySelector('#passwordInput');
-    const togglePasswordType = document.querySelector('#togglePasswordType');
+    if (form) {
+        const passwordInput = document.querySelector('#passwordInput');
+        const togglePasswordType = document.querySelector('#togglePasswordType');
 
-    if (passwordInput && togglePasswordType) {
-        togglePasswordType.addEventListener('change', function () {
-            if (passwordInput && togglePasswordType) {
-                passwordInput.type = togglePasswordType.checked ? 'text' : 'password';
-            }
-        });
+        if (passwordInput && togglePasswordType) {
+            togglePasswordType.addEventListener('change', function () {
+                if (passwordInput && togglePasswordType) {
+                    passwordInput.type = togglePasswordType.checked ? 'text' : 'password';
+                }
+            });
+        };
     }
+
+    // Обработчик состояния кнопки "Войти"
+    if (form) {
+        const loginInput = document.querySelector('input[name="login"]');
+        const passwordInput = document.querySelector('input[name="password"]');
+        const btnSubmit = document.querySelector('button[type="submit"].link-btn');
+
+        function checkFields() {
+            if (loginInput.value.trim() && passwordInput.value.trim()) {
+                btnSubmit.disabled = false;
+            } else {
+                btnSubmit.disabled = true;
+            }
+        }
+
+        loginInput.addEventListener('input', checkFields);
+        passwordInput.addEventListener('input', checkFields);
+
+        checkFields();
+    };
 });
