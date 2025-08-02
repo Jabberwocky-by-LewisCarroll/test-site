@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Сохраняем appID и sessionID для дальнейшего использования
     const appID = '640a9d7b-5015-4ea0-8206-a4eddcef054b';
     const sessionID = localStorage.getItem('sessionID');
-
+    
+    let currentEditingCard = null; // глобальная переменная для хранения карточки
     // Контейнер с карточками
     const container = document.querySelector('.obj-wrapper');
     // Шаблон карточки в контейнере
@@ -35,18 +36,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Обработчик кнопки "Изменить"
                 const btnCardEdit = card.querySelector('.link-btn.edit')
-                btnCardEdit.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const popup = document.querySelector('.popup-window.edit');
-                        popup.classList.replace('hide', 'show');
+                btnCardEdit.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const popup = document.querySelector('.popup-window.edit');
+                    popup.classList.replace('hide', 'show');
 
-                        // Заполняем поля формы данными объекта
-                        const form = popup.querySelector('form');
-                        form.elements['name'].value = obj.name || '';
-                        form.elements['surname'].value = obj.surname || '';
-                        form.elements['email'].value = obj.email || '';
-                        form.elements['id'].value = obj.id || '';
+                    // Запоминаем текущую карточку
+                    currentEditingCard = card;
+
+                    // Заполняем поля формы данными объекта
+                    const form = popup.querySelector('form');
+                    form.elements['name'].value = obj.name || '';
+                    form.elements['surname'].value = obj.surname || '';
+                    form.elements['email'].value = obj.email || '';
+                    form.elements['id'].value = obj.id || '';
                 });
 
                 // Обработчик кнопки "Закрыть форму"
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const popup = document.querySelector('.popup-window');
                     popup.classList.replace('show', 'hide');
                 });
-                         
+                            
                 // Обработка кнопки "Удалить"
                 const btnDelete = card.querySelector('.link-btn.delete');
 
@@ -99,7 +102,51 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                 };
             });
-        });
+
+            const formEdit = document.querySelector('form.edit');
+            formEdit.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = formEdit.elements['name'].value;
+                const surname = formEdit.elements['surname'].value;
+                const email = formEdit.elements['email'].value;
+                const id = formEdit.elements['id'].value;
+
+                fetch(`https://api.directual.com/good/api/v5/data/inputtestapi/editTestObjects?appID=${appID}&sessionID=${sessionID}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "name": name,
+                        "surname": surname,
+                        "email": email,
+                        "testApiStructID": id,
+                        "action": "UPDATE"
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if(result.result[0].success === true) {
+                        alert('Данные успешно обновлены');
+                        const popup = document.querySelector('div.popup-window.edit');
+                        popup.classList.replace('show', 'hide');
+
+                        // --- обновляем карточку на странице ---
+                        if (currentEditingCard) {
+                            currentEditingCard.querySelector('.name').textContent = name;
+                            currentEditingCard.querySelector('.surname').textContent = surname;
+                            currentEditingCard.querySelector('.email').textContent = email;
+                            currentEditingCard.querySelector('.id').textContent = id;
+                        }
+                    } else {
+                        alert('Ошибка обновления: ' + result.result[0].Result);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            })
         } else {
             container.innerHTML += '<p>Нет данных</p>';
         }
