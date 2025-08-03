@@ -16,7 +16,8 @@
     <script src="../src/scripts/currentPageBtnDisabled.js"></script>
 </head>
 <body>
-    <!-- Окна с формами для редактирования и удаления карточек -->
+
+    <!-- Окно с формой редактирования карточки объекта -->
     <div class="popup-window edit hide">
         <form class="form edit">
             <div class="btn__exit-form">
@@ -31,6 +32,9 @@
             <button class="link-btn edit" type="submit">Сохранить</button>
         </form>
     </div>
+    <!-- /окно -->
+
+    <!-- Окно с формой добавления карточки объекта -->
     <div class="popup-window add hide">
         <form class="form add">
             <div class="btn__exit-form">
@@ -44,8 +48,9 @@
             <button class="link-btn add" type="submit">Добавить</button>
         </form>
     </div>
-    <!-- --- -->
-     
+    <!-- /окно -->
+
+    <!-- Навигационная панель (навбар) -->
     <nav class="navbar">
         <div class="navbar__content-wrapper">
             <div class="flex-row">
@@ -60,10 +65,18 @@
             <a class="link-btn" id="logoutBtn" href="../index.html">Выйти</a>
         </div>
     </nav>
+    <!-- /навбар -->
 
+    <!-- Основной контент -->
     <div class="main-wrapper">
         <h1>Список объектов</h1>
-        
+        <div class="flex-row justify-content__right">
+            <button class="link-btn add" type="button">Добавить</button>
+        </div>
+
+        <div style="height: 1rem;"></div>
+
+        <!-- Контейнер для карточек объектов с шаблоном карточки -->
         <div class="obj-wrapper">
             <template id="template">
                 <div class="obj-card">
@@ -87,7 +100,9 @@
                 </div>
             </template>
         </div>
-    <!-- Кнопка для проверки наличия sessionID -->
+        <!-- /контейнер для карточек -->
+
+    <!-- Кнопка для проверки наличия sessionID и кнопка для его удаления [ ВРЕМЕННО ] -->
      <div>
          <button id="sessionIDCheck">Проверить sessionID</button>
          <button id="sessionIDRemove">Удалить sessionID</button>
@@ -106,5 +121,7 @@
                 })
          </script>
      </div>
+     <!-- /временные кнопки -->
+    <!-- /основной контент -->
 </body>
 </html>

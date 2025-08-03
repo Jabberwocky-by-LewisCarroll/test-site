@@ -10,10 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const sessionID = localStorage.getItem('sessionID');
     
     let currentEditingCard = null; // глобальная переменная для хранения карточки
-    // Контейнер с карточками
-    const container = document.querySelector('.obj-wrapper');
-    // Шаблон карточки в контейнере
-    const template = container.querySelector('template');
+    const container = document.querySelector('.obj-wrapper'); // Контейнер с карточками
+    const template = container.querySelector('template'); // Шаблон карточки в контейнере
 
     fetch(`https://api.directual.com/good/api/v5/data/testApi/newTestUser?appID=${appID}&sessionID=${sessionID}`)
     .then(response => response.json())
@@ -53,18 +51,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 // Обработчик кнопки "Закрыть форму"
-                const btnFormExit = document.querySelector('.btn__exit-form')
-                btnFormExit.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const popup = document.querySelector('.popup-window');
-                    popup.classList.replace('show', 'hide');
+                const btnFormExit = document.querySelectorAll('.btn__exit-form')
+                btnFormExit.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const popup = document.querySelectorAll('.popup-window');
+                        popup.forEach(p => p.classList.replace('show', 'hide'));
+                    });
                 });
-                            
-                // Обработка кнопки "Удалить"
-                const btnDelete = card.querySelector('.link-btn.delete');
 
-                // Проверка на наличие кнопки "Удалить"
-                if (btnDelete) {
+                const btnDelete = card.querySelector('.link-btn.delete'); // Обработка кнопки "Удалить"
+                
+                if (btnDelete) { // Проверка на наличие кнопки "Удалить"
                     btnDelete.addEventListener('click', function(e) {
                         e.preventDefault();
 
@@ -102,7 +100,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                 };
             });
+            
+            const btnFormAdd = document.querySelector('button[type="button"].link-btn.add'); // Обработчик кнопки "Добавить"
+            btnFormAdd.addEventListener('click', function() {
+                const popup = document.querySelector('div.popup-window.add');
+                popup.classList.replace('hide', 'show');
+            });
 
+            // Обработчик формы редактирования карточек
             const formEdit = document.querySelector('form.edit');
             formEdit.addEventListener('submit', function(e) {
                 e.preventDefault();
