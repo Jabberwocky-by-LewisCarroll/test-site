@@ -33,22 +33,58 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.appendChild(card);
 
                 // Обработчик кнопки "Изменить"
-                const btnCardEdit = card.querySelector('.link-btn.edit')
-                btnCardEdit.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const popup = document.querySelector('.popup-window.edit');
-                    popup.classList.replace('hide', 'show');
+                const formEdit = document.querySelector('form.edit');
+                if (formEdit) {
+                    const nameInput = formEdit.querySelector('input[name="name"]');
+                    const surnameInput = formEdit.querySelector('input[name="surname"]');
+                    const emailInput = formEdit.querySelector('input[name="email"]');
+                    const idInput = formEdit.querySelector('input[name="id"]');
+                    const btnSubmit = formEdit.querySelector('button[type="submit"]');
 
-                    // Запоминаем текущую карточку
-                    currentEditingCard = card;
+                    let initialValues = {
+                        name: nameInput.value,
+                        surname: surnameInput.value,
+                        email: emailInput.value,
+                        id: idInput.value,
+                    }
 
-                    // Заполняем поля формы данными объекта
-                    const form = popup.querySelector('form');
-                    form.elements['name'].value = obj.name || '';
-                    form.elements['surname'].value = obj.surname || '';
-                    form.elements['email'].value = obj.email || '';
-                    form.elements['id'].value = obj.id || '';
-                });
+                    function checkFields() {
+                        if (
+                            nameInput.value !== initialValues.name ||
+                            surnameInput.value !== initialValues.surname ||
+                            emailInput.value !== initialValues.email ||
+                            idInput.value !== initialValues.id
+                        ) {
+                            btnSubmit.disabled = false;
+                        } else {
+                            btnSubmit.disabled = true;
+                        }
+                    };
+
+                    nameInput.addEventListener('input', checkFields);
+                    surnameInput.addEventListener('input', checkFields);
+                    emailInput.addEventListener('input', checkFields);
+                    idInput.addEventListener('input', checkFields);
+
+                    checkFields();
+                    
+                    const btnCardEdit = card.querySelector('.link-btn.edit');// Обработчик формы редактирования карточек
+                    btnCardEdit.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const popup = document.querySelector('.popup-window.edit');
+                        popup.classList.replace('hide', 'show');
+
+                        // Запоминаем текущую карточку
+                        currentEditingCard = card;
+
+                        // Заполняем поля формы данными объекта
+                        const form = popup.querySelector('form');
+                        form.elements['name'].value = obj.name || '';
+                        form.elements['surname'].value = obj.surname || '';
+                        form.elements['email'].value = obj.email || '';
+                        form.elements['id'].value = obj.id || '';
+                    });
+                };
 
                 // Обработка кнопки "Удалить"
                 const btnDelete = card.querySelector('.link-btn.delete');
@@ -123,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ) {
                 btnSubmit.disabled = false;
             } else {
-                    btnSubmit.disabled = true;
+                btnSubmit.disabled = true;
             }
         };
 
@@ -170,52 +206,55 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         })
     };
+    
+    
 
-    // Обработчик формы редактирования карточек
-    const formEdit = document.querySelector('form.edit');
-    formEdit.addEventListener('submit', function(e) {
-        e.preventDefault();
+        // Обработчик формы редактирования карточек
+        const formEdit = document.querySelector('form.edit');
+        formEdit.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        const name = formEdit.elements['name'].value;
-        const surname = formEdit.elements['surname'].value;
-        const email = formEdit.elements['email'].value;
-        const id = formEdit.elements['id'].value;
+            const name = formEdit.elements['name'].value;
+            const surname = formEdit.elements['surname'].value;
+            const email = formEdit.elements['email'].value;
+            const id = formEdit.elements['id'].value;
 
-        fetch(`https://api.directual.com/good/api/v5/data/inputtestapi/editTestObjects?appID=${appID}&sessionID=${sessionID}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "name": name,
-                "surname": surname,
-                "email": email,
-                "testApiStructID": id,
-                "action": "UPDATE"
+            fetch(`https://api.directual.com/good/api/v5/data/inputtestapi/editTestObjects?appID=${appID}&sessionID=${sessionID}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "name": name,
+                    "surname": surname,
+                    "email": email,
+                    "testApiStructID": id,
+                    "action": "UPDATE"
+                })
             })
-        })
-        .then(response => response.json())
-        .then(result => {
-            if(result.result[0].success === true) {
-                alert('Данные успешно обновлены');
-                const popup = document.querySelector('div.popup-window.edit');
-                popup.classList.replace('show', 'hide');
+            .then(response => response.json())
+            .then(result => {
+                if(result.result[0].success === true) {
+                    alert('Данные успешно обновлены');
+                    const popup = document.querySelector('div.popup-window.edit');
+                    popup.classList.replace('show', 'hide');
 
-                // --- обновляем карточку на странице ---
-                if (currentEditingCard) {
-                    currentEditingCard.querySelector('.name').textContent = name;
-                    currentEditingCard.querySelector('.surname').textContent = surname;
-                    currentEditingCard.querySelector('.email').textContent = email;
-                    currentEditingCard.querySelector('.id').textContent = id;
+                    // --- обновляем карточку на странице ---
+                    if (currentEditingCard) {
+                        currentEditingCard.querySelector('.name').textContent = name;
+                        currentEditingCard.querySelector('.surname').textContent = surname;
+                        currentEditingCard.querySelector('.email').textContent = email;
+                        currentEditingCard.querySelector('.id').textContent = id;
+                    }
+                } else {
+                    alert('Ошибка обновления: ' + result.result[0].Result);
                 }
-            } else {
-                alert('Ошибка обновления: ' + result.result[0].Result);
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        });
+    // };
 
     // Обработчик кнопки "Закрыть форму"
     const btnFormExit = document.querySelectorAll('.btn__exit-form')
