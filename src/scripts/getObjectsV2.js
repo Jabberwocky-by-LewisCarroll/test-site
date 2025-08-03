@@ -93,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     btnDelete.addEventListener('click', function(e) {
                         e.preventDefault();
 
+                        if(!confirm('Удалить карточку объекта?')) {
+                            return;
+                        };
+
                         const name = card.querySelector('.name').textContent;
                         const surname = card.querySelector('.surname').textContent;
                         const email = card.querySelector('.email').textContent;
@@ -206,8 +210,6 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         })
     };
-    
-    
 
         // Обработчик формы редактирования карточек
         const formEdit = document.querySelector('form.edit');
