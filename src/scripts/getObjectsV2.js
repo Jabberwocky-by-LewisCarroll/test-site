@@ -99,8 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
         container.innerHTML += '<p>Ошибка загрузки данных</p>';
         console.error(error);
     });
-
-    // Сюда надо вынести все обработчики, которые не зависят от генерации карточек
             
     // Обработчик кнопки "Добавить"
     const btnFormAdd = document.querySelector('button[type="button"].link-btn.add');
@@ -111,42 +109,67 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Обработчик формы добавления карточек
     const formAdd = document.querySelector('form.add');
-    formAdd.addEventListener('submit', function(e) {
-        e.preventDefault();
+    if (formAdd) {
+        const nameInput = formAdd.querySelector('input[name="name"]');
+        const surnameInput = formAdd.querySelector('input[name="surname"]');
+        const emailInput = formAdd.querySelector('input[name="email"]');
+        const btnSubmit = formAdd.querySelector('button[type="submit"]');
 
-        const name = formAdd.elements['name'].value;
-        const surname = formAdd.elements['surname'].value;
-        const email = formAdd.elements['email'].value;
+        function checkFields() {
+            if (
+                nameInput.value.trim() &&
+                surnameInput.value.trim() && 
+                emailInput.value.trim()
+            ) {
+                btnSubmit.disabled = false;
+            } else {
+                    btnSubmit.disabled = true;
+            }
+        };
 
-        fetch(`https://api.directual.com/good/api/v5/data/testApi/newTestUser?appID=${appID}&sessionID=${sessionID}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "name": name,
-                "surname": surname,
-                "email": email
+        nameInput.addEventListener('input', checkFields);
+        surnameInput.addEventListener('input', checkFields);
+        emailInput.addEventListener('input', checkFields);
+
+        checkFields();
+
+        formAdd.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = formAdd.elements['name'].value;
+            const surname = formAdd.elements['surname'].value;
+            const email = formAdd.elements['email'].value;
+
+            fetch(`https://api.directual.com/good/api/v5/data/testApi/newTestUser?appID=${appID}&sessionID=${sessionID}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "name": name,
+                    "surname": surname,
+                    "email": email
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert('Карточка объекта успешно добавлена!');
+                const popup = document.querySelector('div.popup-window.add');
+                popup.classList.replace('show', 'hide');
+
+                const clone = template.content.cloneNode(true);
+                const card = clone.querySelector('.obj-card');
+                card.querySelector('.name').textContent = result.result[0].name;
+                card.querySelector('.surname').textContent = result.result[0].surname;
+                card.querySelector('.email').textContent = result.result[0].email;
+                card.querySelector('.id').textContent = result.result[0].id;
+                container.appendChild(card);
+            })
+            .catch(error => {
+                console.log(error);
             })
         })
-        .then(response => response.json())
-        .then(result => {
-            alert('Карточка объекта успешно добавлена!');
-            const popup = document.querySelector('div.popup-window.add');
-            popup.classList.replace('show', 'hide');
-
-            const clone = template.content.cloneNode(true);
-            const card = clone.querySelector('.obj-card');
-            card.querySelector('.name').textContent = result.result[0].name;
-            card.querySelector('.surname').textContent = result.result[0].surname;
-            card.querySelector('.email').textContent = result.result[0].email;
-            card.querySelector('.id').textContent = result.result[0].id;
-            container.appendChild(card);
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    })
+    };
 
     // Обработчик формы редактирования карточек
     const formEdit = document.querySelector('form.edit');
