@@ -78,4 +78,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
         checkFields();
     };
+
+    // Анимация drag-and-drop для тестовых данных
+    const draggables = document.querySelectorAll('span.test-data__input-draggable');
+    let offsetX = 0;
+    let offsetY = 0;
+    let isDraggable = null;
+    let startLeft = 0;
+    let startTop = 0;
+
+    draggables.forEach(item => {
+        item.style.position = 'absolute';
+
+        item.addEventListener('mousedown', function(e) {
+            isDraggable = item;
+            offsetX = e.clientX - item.offsetLeft;
+            offsetY = e.clientY - item.offsetTop;
+            startLeft = item.offsetLeft;
+            startTop = item.offsetTop;
+            document.body.style.userSelect = 'none';
+        });
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isDraggable) return;
+        isDraggable.style.left = (e.clientX - offsetX) + 'px';
+        isDraggable.style.top = (e.clientY - offsetY) + 'px';
+    });
+
+    document.addEventListener('mouseup', function() {
+        if (isDraggable) {
+            // Возвращаем на исходное место
+            isDraggable.style.left = startLeft + 'px';
+            isDraggable.style.top = startTop + 'px';
+        }
+        isDraggable = null;
+        document.body.style.userSelect = '';
+    });
 });

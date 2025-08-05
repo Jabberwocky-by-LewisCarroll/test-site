@@ -299,6 +299,14 @@ h3 {
     padding: 1rem;
 }
 
+.test-data__input-draggable {
+    cursor: grab;
+    padding: 0.1rem;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #313131;
+}
+
 /*Позиционирование*/
 .position__absolute_top-left {
     position: absolute;
