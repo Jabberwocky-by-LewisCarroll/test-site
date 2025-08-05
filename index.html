@@ -27,68 +27,59 @@
             <div style="height: 2rem;"></div>
             <a href="public/reg.html" class="link-btn">Зарегистрироваться</a>
             <div style="height: 2rem;"></div>
-            <div style="border: 1px solid #b6b6b6; border-radius: 10px; padding: 0.5rem; color: #00000055;">
-                <h3>Данные входа для тестов</h3>
-                <div class="flex-row justify-content__space-between">
-                    <div>
-                        <p>Логин: 5652513695</p>
-                        <p>Пароль: hlufkk</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: cucumber</p>
-                        <p>Пароль: potato</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: duck</p>
-                        <p>Пароль: cat</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: monkey</p>
-                        <p>Пароль: dog</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: Polina</p>
-                        <p>Пароль: capricorn</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: Igor</p>
-                        <p>Пароль: 1234</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: zombie</p>
-                        <p>Пароль: abcd</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: Limon</p>
-                        <p>Пароль: lime</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: King</p>
-                        <p>Пароль: queen</p>
-                    </div>
-                    <div style="width: 1rem;"></div>
-                    <div>
-                        <p>Логин: King</p>
-                        <p>Пароль: queen</p>
-                    </div>
-                </div>
-            </div>
-            
         </div>
-        <!--Кнопка для перехода к списку объектов V2 (Ссылка полностью стилизована как кнопка)-->
+        <!-- Контейнер для тестовых данных авторизации -->
+         <h3>Тестовые данные для авторизации</h3>
+         <div class="test-data__container" id="test-data-container"></div>
+         <script>
+            const container = document.querySelector('#test-data-container');
+            const testData = [
+                {login: '5652513695', password: 'hlufkk'},
+                {login: 'cucumber', password: 'potato'},
+                {login: 'duck', password: 'cat'},
+                {login: 'monkey', password: 'dog'},
+                {login: 'Polina', password: 'capricorn'},
+                {login: 'Igor', password: '1234'},
+                {login: 'zombie', password: 'abcd'},
+                {login: 'Limon', password: 'lime'},
+                {login: 'King', password: 'queen'},
+            ];
+
+            function insertTestData (users) {
+                return users.map(user => `
+                    <div>
+                        <p>Логин: ${user.login}</p>
+                        <p>Пароль: ${user.password}</p>
+                    </div>
+                `).join('');
+            };
+
+            container.innerHTML = insertTestData(testData);
+         </script>
+        <!--
+        Кнопка для перехода к списку объектов V2 (Ссылка полностью стилизована как кнопка)
+        [ ВРЕМЕННО ]
+         -->
         <div class="mrg-horizon-center">
-            <a class="link-btn" href="public/getObjectsV2.html">Перейти к списку объектов V2</a>
+            <a class="link-btn" id="backDoor" href="#">Перейти к списку объектов V2</a>
+            <script>
+                const btnBackDoor = document.querySelector('#backDoor');
+                function backDoorSessionIDCheck (sessionID) {
+                    if (!sessionID) {
+                        localStorage.setItem('sessionID', '4346b151-bb65-41d9-aa58-a42caab0d073');
+                    }
+                }
+                if (btnBackDoor) {
+                    const sessionID = localStorage.getItem('sessionID');
+                    btnBackDoor.addEventListener('click', () => {
+                    backDoorSessionIDCheck(sessionID);
+                    window.location.href = 'public/getObjectsV2.html';
+                    });
+                };
+            </script>
         </div>
     </div>
-    <!-- Кнопка для проверки наличия sessionID -->
+    <!-- Кнопка для проверки наличия sessionID [ ВРЕМЕННО ] -->
      <div>
          <button id="sessionIDCheck">Проверить sessionID</button>
          <button id="sessionIDRemove">Удалить sessionID</button>

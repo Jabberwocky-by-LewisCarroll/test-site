@@ -31,13 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(result => {
 
-            // Обработка ответа от сервера
-            alert('Ответ сервера: ' + JSON.stringify(result));
-
             if (result.status.toLowerCase() === 'ok') {
                 window.localStorage.setItem('sessionID', result.result.token)
                 window.location.href = 'public/getObjectsV2.html';
-                alert('sessionID was set!');
             } else {
                 alert('Ошибка авторизации: ' + result.message);
                 return;
