@@ -80,37 +80,45 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Анимация drag-and-drop для тестовых данных
-    const draggables = document.querySelectorAll('span.test-data__input-draggable');
-    let offsetX = 0;
-    let offsetY = 0;
+    const draggables = document.querySelectorAll('div.test-data__input-draggable');
+    const loginInput = document.querySelector('input[name="login"]');
+    const passwordInput = document.querySelector('input[name="password"]');
     let isDraggable = null;
-    let startLeft = 0;
-    let startTop = 0;
-
+    let startMouseX = 0;
+    let startMouseY = 0;
+    
     draggables.forEach(item => {
-        item.style.position = 'absolute';
-
         item.addEventListener('mousedown', function(e) {
             isDraggable = item;
-            offsetX = e.clientX - item.offsetLeft;
-            offsetY = e.clientY - item.offsetTop;
-            startLeft = item.offsetLeft;
-            startTop = item.offsetTop;
+            startMouseX = e.clientX;
+            startMouseY = e.clientY;
             document.body.style.userSelect = 'none';
         });
     });
 
     document.addEventListener('mousemove', function(e) {
         if (!isDraggable) return;
-        isDraggable.style.left = (e.clientX - offsetX) + 'px';
-        isDraggable.style.top = (e.clientY - offsetY) + 'px';
+        const dx = e.clientX - startMouseX;
+        const dy = e.clientY - startMouseY;
+        isDraggable.style.transform = `translate(${dx}px, ${dy}px)`;
     });
 
-    document.addEventListener('mouseup', function() {
+    document.addEventListener('mouseup', function(e) {
         if (isDraggable) {
-            // Возвращаем на исходное место
-            isDraggable.style.left = startLeft + 'px';
-            isDraggable.style.top = startTop + 'px';
+            const formRect = form.getBoundingClientRect();
+            if (
+                e.clientX >= formRect.left &&
+                e.clientX <= formRect.right &&
+                e.clientY >= formRect.top &&
+                e.clientY <= formRect.bottom
+            ) {
+                const login = isDraggable.querySelector('p:first-child span').textContent;
+                const password = isDraggable.querySelector('p:last-child span').textContent;
+                loginInput.value = login;
+                passwordInput.value = password;
+            };
+            // Возвращаем на место
+            isDraggable.style.transform = '';
         }
         isDraggable = null;
         document.body.style.userSelect = '';

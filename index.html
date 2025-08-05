@@ -47,9 +47,9 @@
 
             function insertTestData (users) {
                 return users.map(user => `
-                    <div>
-                            <p>Логин: <span class="test-data__input-draggable">${user.login}</span></p>
-                            <p>Пароль: <span class="test-data__input-draggable">${user.password}</span></p>
+                    <div class="test-data__input-draggable">
+                            <p>Логин: <span>${user.login}</span></p>
+                            <p>Пароль: <span>${user.password}</span></p>
                     </div>
                 `).join('');
             };

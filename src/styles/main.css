@@ -288,6 +288,7 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-auto-rows: 1fr;
     gap: 1rem;
+    position: relative;
     width: 100%;
     align-items: center;
     justify-content: center;
