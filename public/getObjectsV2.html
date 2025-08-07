@@ -57,7 +57,7 @@
             <button class="link-btn add" type="button">Добавить</button>
         </div>
 
-        <div style="height: 1rem;"></div>
+        <div class="space__w_1rem"></div>
 
         <!-- Контейнер для карточек объектов с шаблоном карточки -->
         <div class="obj-wrapper">
@@ -67,18 +67,10 @@
                     <p>Фамилия: <span class="surname"></span></p>
                     <p>Email: <span class="email"></span></p>
                     <p>ID: <span class="id"></span></p>
-                    <div class="flex-row">
-                        <div class="mrg-horizon-center">
-                            <a class="link-btn view" href="#">Подробнее</a>
-                        </div>
-                        <div style="width: 1rem;"></div>
-                        <div class="mrg-horizon-center">
-                            <button class="link-btn edit" type="button">Изменить</button>
-                        </div>
-                        <div style="width: 1rem;"></div>
-                        <div class="mrg-horizon-center">
-                            <button class="link-btn delete" type="button">Удалить</button>
-                        </div>
+                    <div class="obj-card__btns">
+                        <a class="link-btn view card" href="#">Подробнее</a>
+                        <button class="link-btn edit card" type="button">Изменить</button>
+                        <button class="link-btn delete card" type="button">Удалить</button>
                     </div>
                 </div>
             </template>

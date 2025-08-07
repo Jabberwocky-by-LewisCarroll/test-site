@@ -256,7 +256,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(error);
             })
         });
-    // };
 
     // Обработчик кнопки "Закрыть форму"
     const btnFormExit = document.querySelectorAll('.btn__exit-form')
