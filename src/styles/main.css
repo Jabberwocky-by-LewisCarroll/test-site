@@ -2,6 +2,7 @@ body {
     margin: 0;
     background-image: radial-gradient(ellipse, #000000 60%, #4a4a4a);
     height: 100vh;
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
 }
 
 p {
@@ -91,6 +92,7 @@ h3 {
     border-radius: 0.25rem;
     border: 0px;
     box-shadow: 0px 0px 10px 0px #000000;
+    font-size: inherit;
 
     transition: transform 0.3s;
 }
@@ -418,5 +420,17 @@ h3 {
     }
     100% {
         display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .obj-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .obj-wrapper {
+        grid-template-columns: 1fr;
     }
 }
