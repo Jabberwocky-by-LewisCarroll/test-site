@@ -229,6 +229,7 @@ button {
     border-color: #ffffff;
     border-radius: 10px;
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 .test-data__input-draggable {
