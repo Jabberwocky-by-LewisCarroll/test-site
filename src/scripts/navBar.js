@@ -33,6 +33,27 @@ document.addEventListener('DOMContentLoaded', function () {
             navBar.innerHTML = html;
             disableCurrentPageLink(); // Вызов функции для отключения кнопки текущей страницы
             logOutBtn();
+
+            // Обработчик кнопки бургер-меню
+            const navbarBurger = document.querySelector('.navbar__btn-burger');
+            const navbarContainerMob = document.querySelector('.navbar__container-mob');
+            const popupWindow = document.createElement('div');
+            popupWindow.classList.add('popup-window', 'hide');
+            document.body.prepend(popupWindow)
+            
+            if (navbarBurger) {
+                navbarBurger.addEventListener('click', () => {
+                    if (navbarBurger.classList.contains('closed')) {
+                        navbarContainerMob.classList.replace('hide', 'show');
+                        popupWindow.classList.replace('hide', 'show')
+                        navbarBurger.classList.replace('closed', 'opened');
+                    } else {
+                        navbarContainerMob.classList.replace('show', 'hide');
+                        popupWindow.classList.replace('show', 'hide');
+                        navbarBurger.classList.replace('opened', 'closed');
+                    };
+                });
+            };
         })
         .catch(error => {
             console.log('Ошибка генерации навбара: ', error)
