@@ -148,6 +148,7 @@ button {
 
     transform: translateX(100%);
     transition: 0.3s;
+    animation-timing-function: ease-in-out;
 }
 
 .navbar__container-mob.hide {

@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const navBar = document.querySelector('#navbar');
 
+    // Глобальная переменная для управления анимацией через консоль
+    window.tl = gsap.timeline();
+
     // Скрипт влияет на кнопку в навигации, которая ведёт на текущую страницу.
     // Если кнопка ведёт на текущую страницу, то она будет неактивна.
     function disableCurrentPageLink() {
@@ -39,7 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const navbarContainerMob = document.querySelector('.navbar__container-mob');
             const popupWindow = document.createElement('div');
             popupWindow.classList.add('popup-window', 'hide');
-            document.body.prepend(popupWindow)
+            document.body.prepend(popupWindow);
+            
+            // Объекты иконки бургера для анимации
+            const burgerItemTop = document.querySelector('.navbar__btn-burger_item.top');
+            const burgerItemMid = document.querySelector('.navbar__btn-burger_item.mid');
+            const burgerItembot = document.querySelector('.navbar__btn-burger_item.bot');
             
             if (navbarBurger) {
                 navbarBurger.addEventListener('click', () => {
@@ -47,10 +55,24 @@ document.addEventListener('DOMContentLoaded', function () {
                         navbarContainerMob.classList.replace('hide', 'show');
                         popupWindow.classList.replace('hide', 'show')
                         navbarBurger.classList.replace('closed', 'opened');
+
+                        // Анимация иконки бургера на открытие меню
+                        tl.to(burgerItemTop, {y: '0.875rem', duration: 0.1, ease: 'in.out'})
+                        tl.to(burgerItembot, {y: '-0.875rem', duration: 0.1, ease: 'in.out'}, '<')
+                        tl.to(burgerItemMid, {opacity: 0, duration: 0.1, ease: 'in.out'})
+                        tl.to(burgerItemTop, {rotation: 45, duration: 0.1, ease: 'in.out'})
+                        tl.to(burgerItembot, {rotation: '-45', duration: 0.1, ease: 'in.out'}, '<');
                     } else {
                         navbarContainerMob.classList.replace('show', 'hide');
                         popupWindow.classList.replace('show', 'hide');
                         navbarBurger.classList.replace('opened', 'closed');
+
+                        // Анимация иконки бургера на закрытие меню
+                        tl.to(burgerItembot, {rotation: 0, duration: 0.1, ease: 'in.out'})
+                        tl.to(burgerItemTop, {rotation: 0, duration: 0.1, ease: 'in.out'}, '<')
+                        tl.to(burgerItemMid, {opacity: 1, duration: 0.1, ease: 'in.out'})
+                        tl.to(burgerItembot, {y: 0, duration: 0.1, ease: 'in.out'})
+                        tl.to(burgerItemTop, {y: 0, duration: 0.1, ease: 'in.out'}, '<');
                     };
                 });
             };
