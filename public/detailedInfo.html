@@ -19,35 +19,15 @@
 
     <!-- Основной контент -->
     <div class="main-wrapper">
-        <div class="wrapper-content-centered flex-column position__relative">
+        <div class="space__4rem"></div>
+        <div class="obj-card__detailed-wrapper">
+            <a class="link-btn back" href="getObjectsV2.html">Назад</a>
             <div class="obj-card__detailed">
                 <h1>Детальная информация</h1>
                 <div id="detailedInfo"></div>
                 <div class="space__5rem"></div>
-                <div class="mrg-horizon-center position__absolute_top-left">
-                    <a class="link-btn" href="getObjectsV2.html">Назад</a>
-                </div>
             </div>
         </div>
     </div>
-    <!-- Кнопка для проверки наличия sessionID -->
-     <div>
-         <button id="sessionIDCheck">Проверить sessionID</button>
-         <button id="sessionIDRemove">Удалить sessionID</button>
-         <script>
-            const sessionIDCheckBtn = document.querySelector('#sessionIDCheck');
-            sessionIDCheckBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const sessionID = localStorage.getItem('sessionID');
-                sessionID ? alert(`sessionID: ${sessionID}`) : alert('sessionID not found in memory');
-            });
-            const sessionIDRemoveBtn = document.querySelector('#sessionIDRemove');
-                sessionIDRemoveBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    localStorage.removeItem('sessionID');
-                    alert('sessionID removed from memory');
-                })
-         </script>
-     </div>
 </body>
 </html>
