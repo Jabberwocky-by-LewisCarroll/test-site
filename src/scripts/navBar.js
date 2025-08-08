@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             logoutBtns.forEach(btn => btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 window.localStorage.removeItem('sessionID');
-                window.location.href = '/index.html';
+                window.location.href = '../index.html';
             }));
         };
     };
