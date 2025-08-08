@@ -77,25 +77,5 @@
                 </div>
             </template>
         </div>
-
-    <!-- Кнопка для проверки наличия sessionID и кнопка для его удаления [ ВРЕМЕННО ] -->
-     <div>
-         <button id="sessionIDCheck">Проверить sessionID</button>
-         <button id="sessionIDRemove">Удалить sessionID</button>
-         <script>
-            const sessionIDCheckBtn = document.querySelector('#sessionIDCheck');
-            sessionIDCheckBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const sessionID = localStorage.getItem('sessionID');
-                sessionID ? alert(`sessionID: ${sessionID}`) : alert('sessionID not found in memory');
-            });
-            const sessionIDRemoveBtn = document.querySelector('#sessionIDRemove');
-                sessionIDRemoveBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    localStorage.removeItem('sessionID');
-                    alert('sessionID removed from memory');
-                })
-         </script>
-     </div>
 </body>
 </html>
