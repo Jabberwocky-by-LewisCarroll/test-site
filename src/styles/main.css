@@ -1,3 +1,4 @@
+/* Глобальные */
 body {
     margin: 0;
     background-image: radial-gradient(ellipse, #000000 60%, #4a4a4a);
@@ -35,7 +36,47 @@ td {
     border: 1px solid rgb(128, 128, 128);
 }
 
-/*Навигация*/
+h1 {
+    text-align: center;
+    color: white;
+}
+
+h3 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+/* Разметка */
+.main-wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+    justify-content: center;
+}
+
+.obj-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrapper-content-centered {
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.btn-add__wrapper {
+    display: flex;
+    justify-content: right;
+}
+
+/* Компоненты */
+/* Навбар */
 .navbar {
     display: flex;
     position: fixed;
@@ -106,20 +147,81 @@ td {
     transform: translateX(0);
 }
 
-/*Заголовки*/
-h1 {
-    text-align: center;
-    color: white;
+/* Карточки */
+.obj-card {
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    background-color: #4d6328;
+    padding: 1rem;
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
+
+    transition: transform 0.3s;
 }
 
-h3 {
-    text-align: center;
-    color: white;
-    margin: 0;
+.obj-card:hover {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    background-color: rgb(84, 103, 55);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    animation-name: obj-card;
+    animation-duration: 0.3s;
+    transform: scale(1.05);
+}
+
+.obj-card__detailed {   
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #4d6328;
+    border-radius: 1rem;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.obj-card__btns {
+    display: flex;
+    gap: 2%;
+    width: 100%;
+    justify-content: space-around;
+}
+
+/* Тестовые данные для входа */
+.test-data__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 10px;
+    padding: 1rem;
 }
 
-/*Кнопки*/
+.test-data__input-draggable {
+    cursor: grab;
+    padding: 0.1rem;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #313131;
+}
+
+/* Кнопки */
 .link-btn {
     display: flex;
     background-color: #104b85;
@@ -129,7 +231,7 @@ h3 {
     align-items: center;
     border-radius: 0.25rem;
     border: 0px;
-    box-shadow: 0px 0px 10px 0px #000000;
+    box-shadow: 0px 0px 10px 0px #ffffff72 inset;
     font-size: inherit;
 
     transition: transform 0.3s;
@@ -186,6 +288,7 @@ h3 {
     transition: 0.3s;
 }
 
+
 .btn__item {
     position: absolute;
     width: 100%;
@@ -199,13 +302,6 @@ h3 {
 
 .btn__item.b {
     transform: rotateZ(-45deg);
-}
-
-.obj-card__btns {
-    display: flex;
-    gap: 2%;
-    width: 100%;
-    justify-content: space-around;
 }
 
 .navbar__btn-burger {
@@ -226,6 +322,10 @@ h3 {
     background-color: rgb(210, 210, 210);
 }
 
+.link-btn.card {
+    box-shadow: 0px 0px 10px 0px #000000;
+}
+
 /*Формы и их состовляющие*/
 .form {
     display: flex;
@@ -238,28 +338,6 @@ h3 {
     gap: 1rem;
     background-color: #2e003b;
     box-shadow: 0px 0px 20px 0px #ffffff;
-}
-
-/*Обёртки*/
-.main-wrapper {
-    padding-left: 5%;
-    padding-right: 5%;
-    justify-content: center;
-}
-
-.obj-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
-    gap: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.wrapper-content-centered {
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
 }
 
 .input__password-type {
@@ -298,78 +376,25 @@ h3 {
     transform: translateY(1rem);
 }
 
-.btn-add__wrapper {
-    display: flex;
-    justify-content: right;
-}
-
-/*Карточки объектов*/
-.obj-card {
-    display: flex; 
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
+/*Таблицы*/
+.tr__alt {
     background-color: #4d6328;
-    padding: 1rem;
-    border: 1px solid #ffffff;
-    border-radius: 1rem;
-
-    transition: transform 0.3s;
 }
 
-.obj-card:hover {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    background-color: rgb(84, 103, 55);
-    padding: 1rem;
-    border-radius: 1rem;
-
-    animation-name: obj-card;
-    animation-duration: 0.3s;
-    transform: scale(1.05);
-}
-
-.obj-card__detailed {   
+.tables__btns {
     display: flex;
-    flex-direction: column;
-    width: 30%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    background-color: #4d6328;
-    border-radius: 1rem;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
-.test-data__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
-    gap: 1rem;
+.tables-wrapper {
     position: relative;
     width: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-radius: 10px;
-    padding: 1rem;
+    height: 100%;
 }
 
-.test-data__input-draggable {
-    cursor: grab;
-    padding: 0.1rem;
-    border: 1px solid #ffffff;
-    border-radius: 10px;
-    background-color: #313131;
-}
-
-/*Позиционирование*/
+/* Утилитарные */
+/* Position */
 .position__absolute_top-left {
     position: absolute;
     top: 5rem;
@@ -384,6 +409,7 @@ h3 {
     position: absolute;
 }
 
+/* Flexbox */
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -394,6 +420,7 @@ h3 {
     flex-direction: row;
 }
 
+/* margin */
 .mrg-horizon-center {
     display: flex;
     margin-left: auto;
@@ -413,6 +440,7 @@ h3 {
     margin-left: 5%;
 }
 
+/* justify-content */
 .justify-content__space-between {
     justify-content: space-between;
 }
@@ -421,49 +449,28 @@ h3 {
     justify-content: right;
 }
 
-/*Таблицы*/
-.tr__alt {
-    background-color: #4d6328;
-}
-
-.tables__btns {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.tables-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-/* Свободное пространство */
-.space__w_05rem {
+.space__05rem {
     width: 0.5rem;
+    height: 0.5rem;
 }
 
-.space__w_1rem {
+.space__1rem {
     width: 1rem;
-}
-
-.space__w_2rem {
-    width: 2rem;
-}
-
-.space__w_5rem {
-    width: 5rem;
-}
-
-.space__h_1rem {
     height: 1rem;
 }
 
-.space__h_4rem {
+.space__2rem {
+    width: 2rem;
+    height: 2rem;
+}
+
+.space__4rem {
+    width: 4rem;
     height: 4rem;
 }
 
-.space__h_5rem {
+.space__5rem {
+    width: 5rem;
     height: 5rem;
 }
 
@@ -504,6 +511,7 @@ h3 {
     }
 }
 
+/* Медиа запросы */
 @media (min-width: 426px) and (max-width: 1026px) {
 
     .test-data__container {
