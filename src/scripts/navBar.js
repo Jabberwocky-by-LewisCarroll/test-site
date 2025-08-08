@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Кнопка для выхода их аккаунта
     // Удаляет sessionID из localStorage и перенаправляет на страницу авторизации
     function logOutBtn () {
-        const logoutBtn = document.querySelector('#logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function (e) {
+        const logoutBtns = document.querySelectorAll('.logoutBtn');
+        if (logoutBtns.length > 0) {
+            logoutBtns.forEach(btn => btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 window.localStorage.removeItem('sessionID');
                 window.location.href = '/index.html';
-        });
+            }));
         };
     };
 
