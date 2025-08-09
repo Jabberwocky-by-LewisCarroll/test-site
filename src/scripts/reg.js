@@ -55,5 +55,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 passwordRepeatInput.type = togglePasswordType.checked ? 'text' : 'password';
             }
         });
-    }
+    };
+
+    // Обработчик состояния кнопки "Войти"
+    if (form) {
+        const loginInput = document.querySelector('input[name="login"]');
+        const passwordInput = document.querySelector('input[name="password"]');
+        const passwordRepeatInput = document.querySelector('input[name="passwordRepeat"]');
+        const btnSubmit = document.querySelector('button[type="submit"].link-btn');
+
+        function checkFields() {
+            if (loginInput.value.trim() && 
+                passwordInput.value.trim() && 
+                passwordRepeatInput.value.trim()) {
+                btnSubmit.disabled = false;
+            } else {
+                btnSubmit.disabled = true;
+            }
+        }
+
+        loginInput.addEventListener('input', checkFields);
+        passwordInput.addEventListener('input', checkFields);
+        passwordRepeatInput.addEventListener('input', checkFields);
+
+        checkFields();
+    };
 });

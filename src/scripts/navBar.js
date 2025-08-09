@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Если кнопка ведёт на текущую страницу, то она будет неактивна.
     function disableCurrentPageLink() {
         const currentPage = location.pathname.split('/').pop();
-        const btn = document.querySelector(`a[href="${currentPage}"].link-btn`);
+        const btns = document.querySelectorAll(`a[href="${currentPage}"].link-btn`);
 
-        if (btn && btn.getAttribute('href') === currentPage) {
-            btn.setAttribute('aria-disabled', 'true');
+        if (btns) {
+            btns.forEach(btn => {
+                if (btn.getAttribute('href') === currentPage) {
+                    btn.setAttribute('aria-disabled', 'true');
+                }
+            });
         }
     };
 
