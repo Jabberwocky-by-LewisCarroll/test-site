@@ -1,4 +1,8 @@
 /* Глобальные */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background-image: radial-gradient(ellipse, #000000 60%, #4a4a4a);
@@ -125,12 +129,16 @@ button {
 
 }
 
+.logo {
+    width: 3rem;
+    height: 3rem;
+}
+
 .navbar__mob {
     display: none;
     position: fixed;
     z-index: 1010;
     top: 0;
-    box-sizing: border-box;
     align-items: center;
     justify-content: space-between;
     padding: 0 4%;
@@ -229,7 +237,6 @@ button {
     border-color: #ffffff;
     border-radius: 10px;
     padding: 1rem;
-    box-sizing: border-box;
 }
 
 .test-data__input-draggable {
@@ -472,6 +479,11 @@ button {
 
 .justify-content__right {
     justify-content: right;
+}
+
+/* Цвета */
+.text-color__pink {
+    color: rgb(255, 78, 208);
 }
 
 .space__05rem {
