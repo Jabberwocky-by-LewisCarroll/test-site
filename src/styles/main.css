@@ -388,7 +388,6 @@ input {
     flex-direction: column;
     width: 20%;
     min-width: 15rem;
-    height: 40%;
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
@@ -405,7 +404,7 @@ input {
 }
 
 .popup-window {
-    display: flex;
+    display: none;
     position: fixed;
     z-index: 1000;
     width: 100vw;
@@ -414,10 +413,11 @@ input {
     backdrop-filter: blur(1px);
     align-items: center;
     justify-content: center;
+
+    transition: 0.3s;
 }
 
 .popup-window.show {
-    display: flex;
     opacity: 1;
 
     transform: translateY(0);
@@ -426,11 +426,9 @@ input {
 }
 
 .popup-window.hide {
-    display: none;
     opacity: 0;
 
     animation-name: popup-window-hide;
-    animation-duration: 0.3s;
     transform: translateY(1rem);
 }
 

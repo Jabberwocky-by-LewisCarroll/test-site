@@ -71,7 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const btnCardEdit = card.querySelector('.link-btn.edit');// Обработчик формы редактирования карточек
                     btnCardEdit.addEventListener('click', function(e) {
                         e.preventDefault();
-                        const popup = document.querySelector('.popup-window.edit');
+                        const popup = document.querySelector('div.popup-window.edit');
+                        popup.style.display = 'flex';
                         popup.classList.replace('hide', 'show');
 
                         // Запоминаем текущую карточку
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnFormAdd = document.querySelector('button[type="button"].link-btn.add');
     btnFormAdd.addEventListener('click', function() {
         const popup = document.querySelector('div.popup-window.add');
+        popup.style.display = 'flex';
         popup.classList.replace('hide', 'show');
     });
 
@@ -262,8 +264,11 @@ document.addEventListener('DOMContentLoaded', function () {
     btnFormExit.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            const popup = document.querySelectorAll('.popup-window');
-            popup.forEach(p => p.classList.replace('show', 'hide'));
+            const popup = document.querySelectorAll('div.popup-window');
+            popup.forEach(p => {
+                p.classList.replace('show', 'hide');
+                setTimeout(() => { p.style.display = 'none' }, 300);
+            });
         });
     });
 });
