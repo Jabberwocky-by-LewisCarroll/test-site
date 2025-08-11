@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (navbarBurger) {
                 navbarBurger.addEventListener('click', () => {
                     if (navbarBurger.classList.contains('closed')) {
+                        navbarContainerMob.style.display = 'flex';
                         navbarContainerMob.classList.replace('hide', 'show');
                         popupWindow.classList.replace('hide', 'show')
                         navbarBurger.classList.replace('closed', 'opened');
@@ -70,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         navbarContainerMob.classList.replace('show', 'hide');
                         popupWindow.classList.replace('show', 'hide');
                         navbarBurger.classList.replace('opened', 'closed');
+                        setTimeout(() => {
+                            navbarContainerMob.style.display = 'none';
+                        }, 300);
 
                         // Анимация иконки бургера на закрытие меню
                         tl.to(burgerItembot, {rotation: 0, duration: 0.1, ease: 'in.out'})

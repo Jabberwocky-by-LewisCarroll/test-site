@@ -67,6 +67,7 @@ input {
 
 /* Разметка */
 .main-wrapper {
+    width: 100%;
     padding-left: 5%;
     padding-right: 5%;
     justify-content: center;
@@ -103,6 +104,7 @@ input {
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: auto;
 }
 
 .form-wrapper__auth-reg {
@@ -166,7 +168,7 @@ input {
 }
 
 .navbar__container-mob {
-    display: flex;
+    display: none;
     flex-direction: column;
     position: fixed;
     z-index: 1000;
@@ -184,13 +186,15 @@ input {
 }
 
 .navbar__container-mob.hide {
-    display: none;
     transform: translateX(100%);
+    animation-name: container-mob-hide;
+    animation-duration: 0.3s;
 }
 
 .navbar__container-mob.show {
-    display: flex;
     transform: translateX(0);
+    animation-name: container-mob-show;
+    animation-duration: 0.3s;
 }
 
 /* Карточки */
@@ -567,6 +571,24 @@ input {
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes container-mob-show {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes container-mob-hide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
     }
 }
 
