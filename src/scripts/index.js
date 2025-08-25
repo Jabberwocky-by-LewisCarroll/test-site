@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(result => {
 
             if (result.status.toLowerCase() === 'ok') {
-                window.localStorage.setItem('sessionID', result.result.token)
+                window.localStorage.setItem('sessionID', result.result.token);
+                window.localStorage.setItem('role', result.result.role);
                 window.location.href = 'public/getObjectsV2.html';
             } else {
                 alert('Ошибка авторизации: ' + result.message);

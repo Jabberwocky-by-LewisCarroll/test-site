@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             logoutBtns.forEach(btn => btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 window.localStorage.removeItem('sessionID');
+                window.localStorage.removeItem('role');
                 window.location.href = '../index.html';
             }));
         };
@@ -44,10 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // Обработчик кнопки бургер-меню
             const navbarBurger = document.querySelector('.navbar__btn-burger');
             const navbarContainerMob = document.querySelector('.navbar__container-mob');
-            const popupWindow = document.createElement('div');
-            popupWindow.classList.add('popup-window', 'hide');
-            document.body.prepend(popupWindow);
-            
             // Объекты иконки бургера для анимации
             const burgerItemTop = document.querySelector('.navbar__btn-burger_item.top');
             const burgerItemMid = document.querySelector('.navbar__btn-burger_item.mid');
@@ -55,6 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if (navbarBurger) {
                 navbarBurger.addEventListener('click', () => {
+                    
+                    let popupWindow = document.querySelector('.popup-window')
+                    if (!popupWindow) {
+                    popupWindow = document.createElement('div');
+                    popupWindow.classList.add('popup-window', 'hide');
+                    document.body.prepend(popupWindow);
+                    };
+
                     if (navbarBurger.classList.contains('closed')) {
                         navbarContainerMob.style.display = 'flex';
                         navbarContainerMob.classList.replace('hide', 'show');
@@ -73,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         navbarBurger.classList.replace('opened', 'closed');
                         setTimeout(() => {
                             navbarContainerMob.style.display = 'none';
+                            const popupWindowRemove = document.querySelector('.popup-window');
+                            popupWindowRemove.remove();
                         }, 300);
 
                         // Анимация иконки бургера на закрытие меню

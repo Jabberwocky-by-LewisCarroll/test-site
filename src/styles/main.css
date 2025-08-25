@@ -7,7 +7,7 @@ body {
     margin: 0;
     background-image: radial-gradient(ellipse, #000000 60%, #4a4a4a);
     height: 100vh;
-    font-size: clamp(0.875rem, 1.5vw, 1.5rem);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
     font-family: 'Arial';
 }
 
@@ -61,7 +61,10 @@ button {
 }
 
 input {
-    font-size: inherit;
+    width: 100%;
+}
+
+textarea {
     width: 100%;
 }
 
@@ -510,6 +513,7 @@ input {
     color: rgb(255, 78, 208);
 }
 
+/* Пустое пространство */
 .space__05rem {
     width: 0.5rem;
     height: 0.5rem;
