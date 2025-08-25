@@ -5,8 +5,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     };
 
-    if (window.localStorage.getItem('role') != 'remindsWebUser') {
-        const addBtn = document.querySelector('.link-btn.add');
+    // Проверка роли и доступа к функционалу кнопки добавления напоминаний
+    const role = window.localStorage.getItem('role');
+    const arrRoles = role.split(',');
+    if (arrRoles.includes('remindWebUser')) {
+        const addBtn = document.querySelector('link-btn.add');
         if (addBtn) {
             addBtn.style.display = 'none';
         };
@@ -121,11 +124,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Обработчик кнопки добавления напоминания
     const btnRemAdd = document.querySelector('button.link-btn.add');
-    if (btnRemAdd) { // Проверка наличия кнопки добавления напоминаний
+    
+    // Проверка наличия кнопки добавления напоминаний
+    if (btnRemAdd) {
         btnRemAdd.addEventListener('click', function () {
             const body = document.querySelector('body');
             let popup = document.querySelector('.popup-window');
 
+            // Проверяем, существует ли уже попап
             if (!document.querySelector('div.popup-window')) {
                 popup = document.createElement('div');
                 popup.classList.add('popup-window', 'hide');
@@ -133,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 body.prepend(popup);
             }
 
-            // Добавляем форму отправки нового напоминания
+            // Добавляем форму отправки черновика напоминания
             popup.innerHTML = `
                     <form class="form from__add-rem">
                         <div class="btn__exit-form">
@@ -184,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     setTimeout(() => {
                         popup.remove();
 
+                        // Отправляем данные на сервер для создания черновика напоминания
                         fetch(`https://api.directual.com/good/api/v5/data/inputremind/newDraftRemind?appID=${appID}&sessionID=${sessionID}`, {
                             method: 'POST',
                             headers: {
@@ -198,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             remAnswer.dateRemind = data.result[0].dateRemind;
                             remAnswer.timeRemind = data.result[0].timeRemind;
 
+                            // Проверяем, существует ли уже попап
                             if (!document.querySelector('div.popup-window')) {
                                 popup = document.createElement('div');
                                 popup.classList.add('popup-window', 'hide');
@@ -205,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 body.prepend(popup);
                             };
 
+                            // Добавляем форму подтверждения напоминания
                             popup.innerHTML = `
                                 <form class="form from__confirm-rem">
                                     <div class="btn__exit-form">
@@ -252,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 formConfirm.addEventListener('submit', function (e) {
                                     e.preventDefault();
 
+                                    // Отправляем данные на сервер для подтверждения напоминания
                                     fetch(`https://api.directual.com/good/api/v5/data/inputremind/confirmRemind?appID=${appID}&sessionID=${sessionID}`, {
                                         method: 'POST',
                                         headers: {
@@ -269,6 +279,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                             popup.remove();
 
                                             if (data.result[0].success === true) {
+
+                                                // Проверяем, существует ли уже попап
                                                 if (!document.querySelector('div.popup-window')) {
                                                 popup = document.createElement('div');
                                                 popup.classList.add('popup-window', 'hide');
@@ -276,6 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 body.prepend(popup);
                                                 };
 
+                                                // Создаём окно с уведомлением об успешной операции
                                                 popup.innerHTML = `
                                                 <form class="form form__add-success">
                                                     <div class="btn__exit-form">
@@ -302,6 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 const formAddSuccess = popup.querySelector('.form__add-success');
                                                 const btnAddSuccess = formAddSuccess.querySelector('.link-btn.form__add-success');
 
+                                                // Обработчик кнопки "Ок" в окне с уведомлением
                                                 if (formAddSuccess && btnAddSuccess) {
                                                     formAddSuccess.addEventListener('submit', (e) => {
                                                         e.preventDefault();
