@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const body = document.querySelector('body');
             let popup = document.querySelector('.popup-window');
 
-            if (!popup) {
+            if (!document.querySelector('div.popup-window')) {
                 popup = document.createElement('div');
                 popup.classList.add('popup-window', 'hide');
                 popup.style.display = 'flex';
@@ -149,16 +149,17 @@ document.addEventListener('DOMContentLoaded', function () {
                             required
                             spellcheck="true"
                             ></textarea>
-                            <button class="link-btn from_add-rem" type="submit">Добавить напоминание</button>
+                            <button class="link-btn from__add-rem" type="submit">Добавить напоминание</button>
                     </form>`;
 
-            const form = popup.querySelector('.form.from_add-rem');
-            const btnAddRem = popup.querySelector('.link-btn.from_add-rem');
-            const btnExit = popup.querySelector('.btn__exit-form');
+            const form = popup.querySelector('.form.from__add-rem');
+            const btnAddRem = popup.querySelector('.link-btn.from__add-rem');
 
             popup.classList.replace('hide', 'show');
 
             // Обработчик кнопки закрытия формы
+            const btnExit = popup.querySelector('.btn__exit-form');
+            
             if (btnExit) {
                 btnExit.addEventListener('click', function () {
                     popup.classList.replace('show', 'hide');
@@ -171,153 +172,164 @@ document.addEventListener('DOMContentLoaded', function () {
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
 
-                    popup.classList.replace('show', 'hide');
-                    setTimeout(() => popup.remove(), 300);
-
                     const formData = new FormData(form);
                     const payload = {
-                        remindText: formData.get('remindText'),
+                        textMessage: formData.get('remindText'),
                         isWeb: true,
                     };
 
                     let remAnswer = {};
 
-                    fetch(`https://api.directual.com/good/api/v5/data/inputremind/newDraftRemind?appID=${appID}&sessionID=${sessionID}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        remAnswer.textRemind = data.result[0].textRemind;
-                        remAnswer.id = data.result[0].id;
-                        remAnswer.dateRemind = data.result[0].dateRemind;
-                        remAnswer.timeRemind = data.result[0].timeRemind;
+                    popup.classList.replace('show', 'hide');
+                    setTimeout(() => {
+                        popup.remove();
 
-                        if (!popup) {
-                            popup = document.createElement('div');
-                            popup.classList.add('popup-window', 'hide');
-                            popup.style.display = 'flex';
-                            body.prepend(popup);
-                        };
+                        fetch(`https://api.directual.com/good/api/v5/data/inputremind/newDraftRemind?appID=${appID}&sessionID=${sessionID}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            remAnswer.textRemind = data.result[0].textRemind;
+                            remAnswer.id = data.result[0].id;
+                            remAnswer.dateRemind = data.result[0].dateRemind;
+                            remAnswer.timeRemind = data.result[0].timeRemind;
 
-                        popup.innerHTML = `
-                            <form class="form from__confirm-rem">
-                                <div class="btn__exit-form">
-                                    <div class="btn__item a"></div>
-                                    <div class="btn__item b"></div>
-                                </div>
-                                <input class="input" name="remindText" type="text" value="${remAnswer.textRemind}" readonly>
-                                <input class="input" name="id" type="text" value="${remAnswer.id}" readonly>
-                                <input class="input" name="dateRemind" type="text" value="${remAnswer.dateRemind}" readonly>
-                                <input class="input" name="timeRemind" type="text" value="${remAnswer.timeRemind}" readonly>
-                                <div class="space__1rem"></div>
-                                <p>Подтвердите, если напоминание записано верно!</p>
-                                <div class="flex-row justify-content__space-between">
-                                    <button class="link-btn from__confirm-rem" type="submit">Подтвердить</button>
-                                    <button class="link-btn cancelRem" type="button">Отменить</button>
-                                </div>
-                            </form>`;
+                            if (!document.querySelector('div.popup-window')) {
+                                popup = document.createElement('div');
+                                popup.classList.add('popup-window', 'hide');
+                                popup.style.display = 'flex';
+                                body.prepend(popup);
+                            };
 
-                        const formConfirm = popup.querySelector('.form.from__confirm-rem');
-                        const btnConfirmRem = formConfirm.querySelector('.link-btn.from__confirm-rem');
-                        const btnCancelRem = formConfirm.querySelector('.link-btn.cancelRem');
+                            popup.innerHTML = `
+                                <form class="form from__confirm-rem">
+                                    <div class="btn__exit-form">
+                                        <div class="btn__item a"></div>
+                                        <div class="btn__item b"></div>
+                                    </div>
+                                    <input class="input" name="remindText" type="text" value="${remAnswer.textRemind}" readonly>
+                                    <input class="input" name="id" type="text" value="${remAnswer.id}" readonly>
+                                    <input class="input" name="dateRemind" type="text" value="${remAnswer.dateRemind}" readonly>
+                                    <input class="input" name="timeRemind" type="text" value="${remAnswer.timeRemind}" readonly>
+                                    <div class="space__1rem"></div>
+                                    <p>Подтвердите, если напоминание записано верно!</p>
+                                    <div class="flex-row justify-content__space-between">
+                                        <button class="link-btn from__confirm-rem" type="submit">Подтвердить</button>
+                                        <button class="link-btn cancelRem" type="button">Отменить</button>
+                                    </div>
+                                </form>`;
 
-                        popup.classList.replace('hide', 'show');
+                            const formConfirm = popup.querySelector('.form.from__confirm-rem');
+                            const btnConfirmRem = formConfirm.querySelector('.link-btn.from__confirm-rem');
+                            const btnCancelRem = formConfirm.querySelector('.link-btn.cancelRem');
 
-                        // Обработчик кнопки закрытия формы
-                        if (btnExit) {
-                            btnExit.addEventListener('click', function () {
-                                popup.classList.replace('show', 'hide');
-                                setTimeout(() => popup.remove(), 300);
-                            });
-                        };
+                            popup.classList.replace('hide', 'show');
 
-                        // Обработчик кнопки "Отменить"
-                        if (btnCancelRem) {
-                            btnCancelRem.addEventListener('click', function () {
-                                popup.classList.replace('show', 'hide');
-                                setTimeout(() => popup.remove(), 300);
-                            });
-                        };
+                            // Обработчик кнопки закрытия формы
+                            const btnExit = popup.querySelector('.btn__exit-form');
 
-                        if (formConfirm && btnConfirmRem) {
-                            formConfirm.addEventListener('submit', function (e) {
-                                e.preventDefault();
-
-                                fetch(`https://api.directual.com/good/api/v5/data/inputremind/from__confirm-remind?appID=${appID}&sessionID=${sessionID}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        'confirmed': 'true',
-                                        'id': remAnswer.id
-                                    })
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    popup.classList.replace('show', 'hide');
-                                    setTimeout(() => popup.remove(), 300);
-
-                                    if (data.result[0].success === true) {
-                                        if (!popup) {
-                                        popup = document.createElement('div');
-                                        popup.classList.add('popup-window', 'hide');
-                                        popup.style.display = 'flex';
-                                        body.prepend(popup);
-                                        };
-
-                                        popup.innerHTML = `
-                                        <form class="form form__add-success">
-                                            <div class="btn__exit-form">
-                                                <div class="btn__item a"></div>
-                                                <div class="btn__item b"></div>
-                                            </div>
-                                            <p>Подтвердите, если напоминание записано верно!</p>
-                                            <button class="link-btn form__add-success" type="submit">Ок</button>
-                                        </form>
-                                        `;
-
-                                        // Обработчик кнопки закрытия формы
-                                        if (btnExit) {
-                                            btnExit.addEventListener('click', function () {
-                                                popup.classList.replace('show', 'hide');
-                                                setTimeout(() => popup.remove(), 300);
-                                            });
-                                        };
-
-                                        const formAddSuccess = popup.querySelector('.form__add-success');
-                                        const btnAddSuccess = formAddSuccess.querySelector('.link-btn.form__add-success');
-
-                                        if (formAddSuccess && btnAddSuccess) {
-                                            formAddSuccess.addEventListener('sumbit', (e) => {
-                                                e.preventDefault();
-
-                                                popup.classList.replace('show', 'hide');
-                                                setTimeout(() => popup.remove(), 300);
-                                            });
-                                        };
-                                    } else {
-                                        alert('Ошибка при создании напоминания. Подробности в консоли.');
-                                        console.log('Не получилось создать напоминание.');                                        
-                                    };
-                                })
-                                .catch(error => {
-                                    alert('Ошибка подтверждения напоминания. Подробности в консоли');
-                                    console.error('Ошибка:', error);
+                            if (btnExit) {
+                                btnExit.addEventListener('click', function () {
                                     popup.classList.replace('show', 'hide');
                                     setTimeout(() => popup.remove(), 300);
                                 });
-                            });
-                        };
-                    })
-                    .catch(error => {
-                        alert('Ошибка при создании напоминанияю. Подробности в консоли');
-                        console.log('Ошибка: ', error);
-                    });
+                            };
+
+                            // Обработчик кнопки "Отменить"
+                            if (btnCancelRem) {
+                                btnCancelRem.addEventListener('click', function () {
+                                    popup.classList.replace('show', 'hide');
+                                    setTimeout(() => popup.remove(), 300);
+                                });
+                            };
+
+                            // Обработчик кнопки "Подтвердить"
+                            if (formConfirm && btnConfirmRem) {
+                                formConfirm.addEventListener('submit', function (e) {
+                                    e.preventDefault();
+
+                                    fetch(`https://api.directual.com/good/api/v5/data/inputremind/confirmRemind?appID=${appID}&sessionID=${sessionID}`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            'confirmed': true,
+                                            'id': remAnswer.id
+                                        })
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        popup.classList.replace('show', 'hide');
+                                        setTimeout(() => {
+                                            popup.remove();
+
+                                            if (data.result[0].success === true) {
+                                                if (!document.querySelector('div.popup-window')) {
+                                                popup = document.createElement('div');
+                                                popup.classList.add('popup-window', 'hide');
+                                                popup.style.display = 'flex';
+                                                body.prepend(popup);
+                                                };
+
+                                                popup.innerHTML = `
+                                                <form class="form form__add-success">
+                                                    <div class="btn__exit-form">
+                                                        <div class="btn__item a"></div>
+                                                        <div class="btn__item b"></div>
+                                                    </div>
+                                                    <p>${data.result[0].descriptionResult}</p>
+                                                    <button class="link-btn form__add-success" type="submit">Ок</button>
+                                                </form>
+                                                `;
+
+                                                popup.classList.replace('hide', 'show');
+
+                                                // Обработчик кнопки закрытия формы
+                                                const btnExit = popup.querySelector('.btn__exit-form');
+                                                
+                                                if (btnExit) {
+                                                    btnExit.addEventListener('click', function () {
+                                                        popup.classList.replace('show', 'hide');
+                                                        setTimeout(() => popup.remove(), 300);
+                                                    });
+                                                };
+
+                                                const formAddSuccess = popup.querySelector('.form__add-success');
+                                                const btnAddSuccess = formAddSuccess.querySelector('.link-btn.form__add-success');
+
+                                                if (formAddSuccess && btnAddSuccess) {
+                                                    formAddSuccess.addEventListener('submit', (e) => {
+                                                        e.preventDefault();
+
+                                                        popup.classList.replace('show', 'hide');
+                                                        setTimeout(() => popup.remove(), 300);
+                                                    });
+                                                };
+                                            } else {
+                                                alert('Ошибка при создании напоминания. Подробности в консоли.');
+                                                console.log('Не получилось создать напоминание.');                                        
+                                            };
+                                        }, 300);
+                                    })
+                                    .catch(error => {
+                                        alert('Ошибка подтверждения напоминания. Подробности в консоли');
+                                        console.error('Ошибка:', error);
+                                        popup.classList.replace('show', 'hide');
+                                        setTimeout(() => popup.remove(), 300);
+                                    });
+                                });
+                            };
+                        })
+                        .catch(error => {
+                            alert('Ошибка при создании напоминания. Подробности в консоли');
+                            console.log('Ошибка: ', error);
+                        });
+                    }, 300);
                 });
             };
         });
